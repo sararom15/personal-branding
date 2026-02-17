@@ -20,6 +20,47 @@ const { title, description = "Personal Branding Website" } = Astro.props;
 		<link rel="icon" type="image/png" href="/LogoSaraRomano_senzaBackground.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={new URL(Astro.url.pathname, 'https://www.romanosara.com').href} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, 'https://www.romanosara.com').href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://www.romanosara.com/Sara_SenzaBackground.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={new URL(Astro.url.pathname, 'https://www.romanosara.com').href} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://www.romanosara.com/Sara_SenzaBackground.png" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sara Romano",
+        "jobTitle": "Robotics & AI Engineer",
+        "url": "https://www.romanosara.com",
+        "image": "https://www.romanosara.com/Sara_SenzaBackground.png",
+        "sameAs": [
+          "https://www.linkedin.com/in/sara-romano-1368591b7",
+          "https://github.com/sararom15",
+          "https://www.instagram.com/rasa_noma/",
+          "https://www.facebook.com/sara.romano.503/"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "sara.romano.15@gmail.com",
+          "telephone": "+39 3273921925",
+          "contactType": "customer support"
+        }
+      }
+    </script>
 	</head>
 	<body>
 		<Header />

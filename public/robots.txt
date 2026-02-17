@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.romanosara.com/sitemap-index.xml
