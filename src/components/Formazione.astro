@@ -1,0 +1,113 @@
+---
+const education = [
+  {
+    institution: "Università LUMSA, Roma",
+    degree: "Master di II livello - Comunicazione Digitale, AI e Innovazione nel Marketing",
+    year: "2025 - 2026",
+    description: "Il Master fornisce competenze specialistiche nella progettazione, gestione e implementazione di piani di marketing strategico e operativo data-driven, attraverso l’integrazione di strumenti digitali avanzati e algoritmi di intelligenza artificiale. Il percorso approfondisce lo sviluppo di tecniche innovative di social media marketing e management, l’applicazione dell’AI al content management per la creazione e personalizzazione dei contenuti, l’implementazione di strategie di funnel marketing basate su AI, l’utilizzo di machine learning per il sentiment analysis e l’ottimizzazione delle strategie di search engine marketing tramite analisi avanzate delle performance."
+  },
+  {
+    institution: "Università degli Studi di Genova",
+    degree: "Laurea Magistrale - Robotics Engineering",
+    year: "2019 - 2021",
+    description: "Ho approfondito tematiche di automazione robotica, intelligenza artificiale e controllo dei sistemi complessi. Il percorso mi ha permesso di acquisire solide competenze in programmazione, machine learning e analisi dei dati, sviluppando un approccio ingegneristico alla progettazione e all’innovazione tecnologica. Tesi finale dedicata allo sviluppo in Python di un algoritmo di localizzazione e navigazione per un robot in ambienti affollati."
+  },
+  {
+    institution: "Leibniz University Hannover (Germany)",
+    degree: "Erasmus +",
+    year: "2019",
+    description: "Esperienza lavorativa nel campo della soft robotics. Il compito principale è stato lo sviluppo di un Soft Pneumatic Gripper: dalla modellazione 3D, all’analisi FEA e post-processing, fino alla stampa tramite stampante 3D."
+  },
+  {
+    institution: "Università Politecnica delle Marche, Ancona",
+    degree: "Laurea Triennale - Ingegneria Meccanica",
+    year: "2015 - 2019",
+    description: "Ho maturato competenze di base in progettazione meccanica, sistemi di automazione e modellazione fisica dei processi industriali. Durante il percorso ho sviluppato un metodo analitico e orientato alla soluzione di problemi complessi, che oggi applico nella progettazione di sistemi digitali e di automazione."
+  }
+];
+---
+
+<section id="formazione">
+  <div class="container small-container">
+    <div class="section-header">
+      <h2 class="section-title">Formazione</h2>
+      <p class="section-subtitle">Imparare. Evolvere. Migliorare.</p>
+    </div>
+    <div class="education-list">
+      {education.map(item => (
+        <div class="edu-item">
+          <div class="edu-year">{item.year}</div>
+          <div class="edu-details">
+            <h3>{item.degree}</h3>
+            <span class="institution">{item.institution}</span>
+            <p class="edu-description">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .small-container {
+    max-width: 800px;
+  }
+
+  .education-list {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .edu-item {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .edu-item:last-child {
+    border-bottom: none;
+  }
+
+  .edu-year {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .edu-details h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .institution {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .edu-description {
+    color: #cccccc;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .edu-item {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .edu-year {
+      min-width: auto;
+    }
+  }
+</style>

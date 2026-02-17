@@ -1,0 +1,158 @@
+---
+const services = [
+  {
+    title: "Automation & AI",
+    description: "Sviluppo e integrazione di assistenti intelligenti e processi automatizzati",
+    icon: "cpu"
+  },
+  {
+    title: "Data Analysis & Dashboarding",
+    description: "Analisi strategiche e report visivi per decisioni data-driven",
+    icon: "bar-chart"
+  },
+  {
+    title: "Software & Web Development",
+    description: "Custom software e piattaforme web.",
+    icon: "code"
+  },
+  {
+    title: "Digital Innovation & Communication",
+    description: "Strategie di marketing e comunicazione basate su dati e creatività",
+    icon: "message-circle" 
+  }
+];
+---
+
+<section id="cosa-faccio" class="section-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Cosa Faccio</h2>
+      <p class="section-subtitle">DOVE I DATI INCONTRANO LE PERSONE</p>
+    </div>
+    
+    <div class="intro-text">
+      <p>
+        Mi occupo di <strong class="highlight">AI e automazioni</strong>, <strong class="highlight">analisi dei dati</strong> e <strong class="highlight">sviluppo di piattaforme web</strong>, accompagnando le imprese nella loro evoluzione digitale.
+      </p>
+      <p>
+        Aiutare a comprendere e utilizzare il digitale in modo pratico, accessibile e coerente con la loro identità è la mia <strong>MISSIONE</strong>.
+      </p>
+      <p>
+        Coniugo tecnica e visione strategica: Analizzo dati e progetto dashboard per ottenere insight necessari a migliorare la strategia, sviluppo software e creo <strong class="highlight">workflow intelligenti</strong> per migliorare processi e produttività.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {services.map(service => (
+        <div class="service-card">
+          <div class="icon-box">
+             <!-- Placeholder icon logic -->
+             <div class="icon-circle"></div>
+          </div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="cta-container">
+      <a href="#contatti" class="btn btn-primary">Connettiamoci!</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-alt {
+    background-color: var(--color-surface);
+  }
+
+  .intro-text {
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    text-align: center;
+  }
+
+  .intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #cccccc;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 4rem; /* Extra space for scrolling past last card */
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background-color: var(--color-bg);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    
+    /* Stacking Effect Logic */
+    position: sticky;
+    top: calc(var(--header-height) + 2rem); 
+    /* Each card needs a different top if we want them to stack visibly, 
+       but for a simple "deck" effect where they slide over, same top works 
+       if the parent has enough height. 
+       However, to see the titles of previous ones, we usually offset them.
+       Let's try a simple sticky first. */
+    box-shadow: 0 -10px 20px rgba(0,0,0,0.1); 
+  }
+
+  /* Optional: Offset top for each card so they stack like a deck */
+  .service-card:nth-child(1) { top: calc(var(--header-height) + 2rem); }
+  .service-card:nth-child(2) { top: calc(var(--header-height) + 4rem); }
+  .service-card:nth-child(3) { top: calc(var(--header-height) + 6rem); }
+  .service-card:nth-child(4) { top: calc(var(--header-height) + 8rem); }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    box-shadow: 0 -10px 30px rgba(255, 92, 0, 0.1);
+  }
+
+  .icon-box {
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 92, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Would add SVG icon inside icon-circle */
+
+  .service-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .service-card p {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .cta-container {
+    margin-top: 4rem;
+    text-align: center;
+    position: relative;
+    z-index: 100; /* Ensure it stays above sticky cards if needed, though after grid flow it should be fine */
+  }
+</style>

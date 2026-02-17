@@ -1,0 +1,114 @@
+<section id="hero" class="hero-section">
+  <div class="sticky-container">
+    <div class="content-wrapper">
+      
+      <!-- Aphorism - Top Right -->
+      <p class="aphorism">
+        “La vera innovazione nasce quando la tecnologia impara a parlare il linguaggio delle persone”
+      </p>
+
+      <!-- Text Layer (Foreground) -->
+      <div class="text-layer">
+        <h1 class="main-title">Ciao,<br/> sono Sara Romano</h1>
+        <h2 class="role-title">Robotics & AI Engineer, based in Puglia</h2>
+        
+        <div class="cta-group">
+
+          <a href="#contatti" class="btn btn-outline">Connettiamoci!</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center; /* keep center alignment generally */
+  }
+
+  .sticky-container {
+    width: 100%;
+  }
+
+  .content-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 100vh; /* Full viewport height to allow absolute positioning relative to screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Default center */
+  }
+
+  /* TEXT LAYER */
+  .text-layer {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto; 
+    text-align: center;
+    /* Push text down visually to be "below the face" */
+    margin-top: 45vh; /* Push down significantly */
+    transform: translateY(-20%); /* Fine tune */
+  }
+
+  .main-title {
+    font-size: 3.5rem; /* Reduced from 5rem */
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  }
+
+  .role-title {
+    font-size: 1rem; /* Reduced from 1.2rem */
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .aphorism {
+    position: absolute;
+    top: 120px;
+    left: 1.5rem; /* Moved to Left */
+    max-width: 250px;
+    text-align: left; /* Aligned Left */
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #e0e0e0;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    z-index: 10;
+    opacity: 0.8;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .main-title {
+      font-size: 2.5rem; /* Reduced from 3rem */
+    }
+    .role-title {
+      font-size: 0.9rem; /* Reduced for mobile */
+      margin-bottom: 1.5rem;
+    }
+    .text-layer {
+        margin-top: 0; /* Reset on mobile */
+    }
+    .aphorism {
+        display: none; /* Maybe hide on mobile if too cluttered? or position differently */
+    }
+  }
+</style>

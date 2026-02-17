@@ -1,0 +1,45 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-cta">
+      <h3>GRAZIE PER ESSERE QUI!</h3>
+      <p class="footer-tagline">Let's make something great together.</p>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Sara Romano. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-surface);
+    padding: 4rem 0 2rem 0;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .footer-cta h3 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-tagline {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-bottom {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+  }
+</style>

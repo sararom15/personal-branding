@@ -1,0 +1,133 @@
+---
+const experiences = [
+  {
+    role: "Automation & AI Specialist",
+    company: "Asernet",
+    location: "Foggia",
+    period: "2025 - Present",
+    description: "In Asernet mi occupo di analisi dei dati, sviluppo software e automazioni intelligenti. Lavoro a progetti che integrano intelligenza artificiale e digital strategy, collaborando con team marketing e sviluppo per creare strumenti data-driven e piattaforme di innovazione digitale.",
+    details: [
+      {
+        title: "DATA ANALYSIS & DATA VISUALIZATION",
+        text: "Progetto e sviluppo dashboard dinamiche per analizzare dati provenienti da GA4, Prestashop, CRM e Google Ads. Mi occupo di studiare, pulire e centralizzare i dati in un data warehouse unificato, trasformandoli in insight chiari e comprensibili anche per manager non tecnici."
+      },
+      {
+        title: "AUTOMAZIONI E AGENTI AI",
+        text: "Sviluppo e integrazione di agenti AI avanzati per l'automazione dei processi aziendali, riducendo le attività ripetitive e potenziando le capacità decisionali del team."
+      }
+    ]
+  },
+  {
+    role: "Hyperautomation Developer",
+    company: "Sprint Reply",
+    location: "Milano",
+    period: "2022 - 2025",
+    description: "Durante la mia esperienza in Reply, mi sono specializzata nella Robotic Process Automation (RPA), progettando soluzioni automatizzate per grandi realtà aziendali. Questa fase mi ha insegnato il valore della struttura, dell’ottimizzazione e della scalabilità, competenze che oggi applico in contesti più fluidi e creativi."
+  }
+];
+---
+
+<section id="esperienze">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Esperienze</h2>
+      <p class="section-subtitle">CRESCITA, METODO E CONTAMINAZIONE</p>
+    </div>
+    <div class="timeline">
+      {experiences.map((exp, index) => (
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="period">{exp.period}</span>
+            <h3>{exp.role} <span class="company">@ {exp.company}, {exp.location}</span></h3>
+            <p>{exp.description}</p>
+            {exp.details && (
+              <div class="experience-details">
+                {exp.details.map(detail => (
+                  <div class="detail-item">
+                    <h4>{detail.title}</h4>
+                    <p>{detail.text}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 3rem auto 0 auto;
+    padding-left: 2rem;
+    border-left: 2px solid var(--color-border);
+  }
+
+  .timeline-item {
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.6rem; /* Adjust based on border + padding */
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-bg);
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+  }
+
+  .period {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .company {
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .timeline-content h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    color: #cccccc;
+  }
+
+  .experience-details {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .detail-item h4 {
+    color: var(--color-primary);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .detail-item p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+</style>
