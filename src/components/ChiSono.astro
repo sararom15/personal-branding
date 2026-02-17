@@ -7,23 +7,23 @@
       <p class="section-subtitle">L'UMANITÀ DIETRO LA TECNOLOGIA</p>
     </div>
     <div class="about-text">
-      <div class="bio">
-        <p>
-          Sono nata nel <strong class="highlight">Sud Italia</strong>, tra ulivi, vento e orizzonti aperti.
-          Da lì nasce la mia visione:
-          <strong class="highlight">l’innovazione come opportunità di rinascita</strong>,
-          come modo per restituire valore al territorio e alle persone che lo abitano.
-        </p>
-        <p>
-          Dopo la laurea in Ingegneria Robotica, ho scelto di ampliare il mio percorso nel mondo della comunicazione e dell’intelligenza artificiale, per imparare non solo a costruire sistemi, ma a dare loro un senso umano.
-        </p>
-        <p>
-          Oggi lavoro in ambito <strong class="highlight">AI e automazione digitale</strong>, ma continuo a portare con me la mia parte più creativa: la curiosità, la voglia di imparare e la ricerca dell’equilibrio, la stessa che ritrovo nel Pilates, mia passione e disciplina.
-        </p>
-        <p>
-          Credo che la tecnologia debba essere inclusiva e comprensibile, e che il vero progresso nasca dall’incontro tra <strong class="highlight">empatia, intelligenza e innovazione</strong>.
-        </p>
-      </div>
+        <div class="bio">
+          <p>
+            Sono nata nel <strong class="highlight">Sud Italia</strong>, tra ulivi, vento e orizzonti aperti.
+            Da lì nasce la mia visione:
+            <strong class="highlight">l’innovazione come opportunità di rinascita</strong>,
+            come modo per restituire valore al territorio e alle persone che lo abitano.
+          </p>
+          <p>
+            Dopo la laurea in Ingegneria Robotica, ho scelto di ampliare il mio percorso nel mondo della comunicazione e dell’intelligenza artificiale, per imparare non solo a costruire sistemi, ma a dare loro un senso umano.
+          </p>
+          <p>
+            Oggi lavoro in ambito <strong class="highlight">AI e automazione digitale</strong>, ma continuo a portare con me la mia parte più creativa: la curiosità, la voglia di imparare e la ricerca dell’equilibrio, la stessa che ritrovo nel Pilates, mia passione e disciplina.
+          </p>
+          <p>
+            Credo che la tecnologia debba essere inclusiva e comprensibile, e che il vero progresso nasca dall’incontro tra <strong class="highlight">empatia, intelligenza e innovazione</strong>.
+          </p>
+        </div>
     </div>
   </div>
 </section>
@@ -33,10 +33,16 @@
     background-color: var(--color-surface);
   }
 
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
   .about-text {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    text-align: left;
   }
 
   .highlight {
@@ -52,7 +58,83 @@
     margin-bottom: 1.5rem;
     font-size: 1.1rem;
     color: #cccccc;
+    line-height: 1.7;
   }
 
+  /* PHOTO STACK STYLES */
+  .visual-col {
+    position: relative;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-</style>
+  .photo-stack {
+    position: relative;
+    width: 300px;
+    height: 400px;
+  }
+
+  .photo-wrapper {
+    position: absolute;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease, z-index 0.4s;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .photo-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Photo 1: Bottom Layer, darker, tilted left */
+  .p1 {
+    width: 260px;
+    height: 340px;
+    top: 20px;
+    left: 0;
+    transform: rotate(-6deg) scale(0.9);
+    z-index: 1;
+    filter: brightness(0.7) grayscale(0.3);
+  }
+
+  /* Photo 2: Top Layer, bright, tilted right */
+  .p2 {
+    width: 280px;
+    height: 360px;
+    top: 0;
+    right: 0;
+    transform: rotate(4deg);
+    z-index: 2;
+  }
+
+  .photo-stack:hover .p1 {
+    transform: rotate(-10deg) translateX(-20px) scale(0.95);
+    filter: brightness(1) grayscale(0);
+    z-index: 3;
+  }
+
+  .photo-stack:hover .p2 {
+    transform: rotate(8deg) translateX(20px);
+  }
+
+  @media (max-width: 900px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .visual-col {
+      order: -1;
+      height: 350px;
+    }
+    
+    .about-text {
+      text-align: center;
+    }
+  }</style>

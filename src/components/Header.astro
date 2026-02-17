@@ -8,7 +8,7 @@ const navItems = [
 <header class="header">
   <div class="header-container">
     <a href="#" class="logo">
-      PORTFOLIO<span class="dot">.</span>
+      <img src="/LogoSaraRomano_senzaBackground.png" alt="Sara Romano Logo" />
     </a>
     <nav class="nav">
       <ul class="nav-list">
@@ -51,13 +51,14 @@ const navItems = [
   }
 
   .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 
-  .dot {
-    color: var(--color-primary);
+  .logo img {
+    height: 50px; /* Adjust based on header height (80px) */
+    width: auto;
   }
 
   .nav {

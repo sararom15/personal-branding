@@ -30,16 +30,27 @@ const services = [
       <p class="section-subtitle">DOVE I DATI INCONTRANO LE PERSONE</p>
     </div>
     
-    <div class="intro-text">
-      <p>
-        Mi occupo di <strong class="highlight">AI e automazioni</strong>, <strong class="highlight">analisi dei dati</strong> e <strong class="highlight">sviluppo di piattaforme web</strong>, accompagnando le imprese nella loro evoluzione digitale.
-      </p>
-      <p>
-        Aiutare a comprendere e utilizzare il digitale in modo pratico, accessibile e coerente con la loro identità è la mia <strong>MISSIONE</strong>.
-      </p>
-      <p>
-        Coniugo tecnica e visione strategica: Analizzo dati e progetto dashboard per ottenere insight necessari a migliorare la strategia, sviluppo software e creo <strong class="highlight">workflow intelligenti</strong> per migliorare processi e produttività.
-      </p>
+    <div class="intro-content">
+      <div class="intro-text">
+        <p>
+          Mi occupo di <strong class="highlight">AI e automazioni</strong>, <strong class="highlight">analisi dei dati</strong> e <strong class="highlight">sviluppo di piattaforme web</strong>, accompagnando le imprese nella loro evoluzione digitale.
+        </p>
+        <p>
+          Aiutare a comprendere e utilizzare il digitale in modo pratico, accessibile e coerente con la loro identità è la mia <strong>MISSIONE</strong>.
+        </p>
+        <p>
+          Coniugo tecnica e visione strategica: Analizzo dati e progetto dashboard per ottenere insight necessari a migliorare la strategia, sviluppo software e creo <strong class="highlight">workflow intelligenti</strong> per migliorare processi e produttività.
+        </p>
+      </div>
+
+      <div class="intro-visual">
+         <div class="image-wrapper img-1">
+           <img src="/SaraAIFestival.JPG" alt="Sara a AI Festival" />
+         </div>
+         <div class="image-wrapper img-2">
+           <img src="/SaraAIFestival2.JPG" alt="Sara Speaker" />
+         </div>
+      </div>
     </div>
 
     <div class="services-grid">
@@ -66,15 +77,24 @@ const services = [
     background-color: var(--color-surface);
   }
 
+  /* Split Layout */
+  .intro-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+
   .intro-text {
-    max-width: 800px;
-    margin: 0 auto 3rem auto;
-    text-align: center;
+    text-align: left;
+    max-width: none; /* Reset max-width constraint */
+    margin: 0;
   }
 
   .intro-text p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    line-height: 1.8;
     color: #cccccc;
     margin-bottom: 1.5rem;
   }
@@ -83,12 +103,79 @@ const services = [
     color: var(--color-primary);
     font-weight: 600;
   }
-  
+
+  /* Visual Grid on Right */
+  .intro-visual {
+    position: relative;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-wrapper {
+    position: absolute;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* First Image: Back, larger, tilted left */
+  .img-1 {
+    width: 280px;
+    height: 380px;
+    top: 10px;
+    left: 20px;
+    z-index: 1;
+    transform: rotate(-3deg);
+    filter: brightness(0.7);
+  }
+
+  /* Second Image: Front, slightly smaller but focal, tilted right */
+  .img-2 {
+    width: 260px;
+    height: 340px;
+    bottom: 0;
+    right: 20px;
+    z-index: 2;
+    transform: rotate(3deg) translateY(20px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  }
+
+  /* Interactive Hover */
+  .intro-visual:hover .img-1 {
+    transform: rotate(-5deg) translateX(-15px) scale(0.95);
+    filter: brightness(1);
+    z-index: 2;
+  }
+
+  .intro-visual:hover .img-2 {
+    transform: rotate(5deg) translateX(15px) scale(0.95);
+    z-index: 1; /* Swap depth on hover */
+    filter: brightness(0.5);
+  }
+
+  .intro-visual:hover .img-2:hover {
+    filter: brightness(1);
+    z-index: 3;
+    transform: scale(1.05);
+  }
+
+  /* Services Grid */
   .services-grid {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding-bottom: 4rem; /* Extra space for scrolling past last card */
+    padding-bottom: 4rem;
     max-width: 800px;
     margin: 0 auto;
   }
@@ -99,19 +186,12 @@ const services = [
     border-radius: 20px;
     border: 1px solid var(--color-border);
     transition: transform 0.3s ease, border-color 0.3s ease;
-    
-    /* Stacking Effect Logic */
     position: sticky;
-    top: calc(var(--header-height) + 2rem); 
-    /* Each card needs a different top if we want them to stack visibly, 
-       but for a simple "deck" effect where they slide over, same top works 
-       if the parent has enough height. 
-       However, to see the titles of previous ones, we usually offset them.
-       Let's try a simple sticky first. */
+    top: calc(var(--header-height) + 2rem);
     box-shadow: 0 -10px 20px rgba(0,0,0,0.1); 
   }
 
-  /* Optional: Offset top for each card so they stack like a deck */
+  /* Stacking offsets */
   .service-card:nth-child(1) { top: calc(var(--header-height) + 2rem); }
   .service-card:nth-child(2) { top: calc(var(--header-height) + 4rem); }
   .service-card:nth-child(3) { top: calc(var(--header-height) + 6rem); }
@@ -136,7 +216,6 @@ const services = [
     align-items: center;
     justify-content: center;
   }
-  /* Would add SVG icon inside icon-circle */
 
   .service-card h3 {
     margin-bottom: 1rem;
@@ -153,6 +232,24 @@ const services = [
     margin-top: 4rem;
     text-align: center;
     position: relative;
-    z-index: 100; /* Ensure it stays above sticky cards if needed, though after grid flow it should be fine */
+    z-index: 100;
+  }
+
+
+  @media (max-width: 1024px) {
+    .intro-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+    
+    .intro-text {
+      text-align: center;
+    }
+
+    .intro-visual {
+      order: -1; /* Pictures first on mobile/tablet */
+      margin-bottom: 2rem;
+    }
   }
 </style>
