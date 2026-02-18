@@ -19,6 +19,9 @@ const { title, description = "Personal Branding Website" } = Astro.props;
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/LogoSaraRomano_senzaBackground.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
@@ -45,7 +48,16 @@ const { title, description = "Personal Branding Website" } = Astro.props;
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Sara Romano",
-        "jobTitle": "Robotics & AI Engineer",
+        "jobTitle": "AI Engineer e specialista in Digital Innovation & Communication",
+        "description": "AI Engineer specializzata in Intelligenza Artificiale, sviluppo di agenti AI, automazione intelligente e innovazione digitale per imprese",
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Agents",
+          "Generative AI",
+          "Automation",
+          "Machine Learning",
+          "Business Model Innovation"
+        ],
         "url": "https://www.romanosara.com",
         "image": "https://www.romanosara.com/Sara_SenzaBackground.png",
         "sameAs": [
@@ -54,7 +66,7 @@ const { title, description = "Personal Branding Website" } = Astro.props;
           "https://www.instagram.com/rasa_noma/",
           "https://www.facebook.com/sara.romano.503/"
         ],
-          "contactPoint": {
+        "contactPoint": {
           "@type": "ContactPoint",
           "email": "sara.romano.15@gmail.com",
           "contactType": "customer support"
