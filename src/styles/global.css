@@ -106,14 +106,27 @@ img {
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
-  color: white;
+  display: inline-block;
+  background-color: transparent;
+  color: var(--color-primary);
+  padding: 1rem 3rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: 0 0 30px rgba(255, 92, 0, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 92, 0, 0.3);
 }
 
 .btn-outline {

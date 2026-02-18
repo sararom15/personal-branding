@@ -1,7 +1,9 @@
 ---
 const navItems = [
-  { name: 'Cosa Faccio', href: '#cosa-faccio' },
-  { name: 'Connettiamoci!', href: '#contatti' },
+  { name: 'Esperienze', href: '#esperienze', download: false },
+  { name: 'Progetti', href: '#progetti', download: false },
+  { name: 'Scarica il mio CV', href: '/CV_SaraRomano.pdf', download: true },
+  { name: 'Connettiamoci!', href: '#contatti', download: false },
 ];
 ---
 
@@ -13,7 +15,15 @@ const navItems = [
     <nav class="nav">
       <ul class="nav-list">
         {navItems.map(item => (
-          <li><a href={item.href} class="nav-link">{item.name}</a></li>
+          <li>
+            <a 
+              href={item.href} 
+              class="nav-link" 
+              download={item.download ? "" : undefined}
+            >
+              {item.name}
+            </a>
+          </li>
         ))}
       </ul>
       <button class="mobile-menu-btn" aria-label="Menu">
@@ -80,6 +90,8 @@ const navItems = [
     font-weight: 500;
     position: relative;
     padding-bottom: 4px;
+    color: var(--color-text);
+    text-decoration: none;
   }
 
   /* Animated underline */

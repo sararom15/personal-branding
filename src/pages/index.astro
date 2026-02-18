@@ -150,10 +150,12 @@ import Contatti from '../components/Contatti.astro';
     
     .avatar-wrapper {
       transform-origin: bottom center;
-      /* Mobile Scroll Animation: Wrapper Moves */
+      /* Mobile Scroll Animation: Wrapper Moves to Bottom Right */
       transform: 
-        translateY(calc( 0% - (var(--avatar-progress) * 65vh) ))
-        translateX(calc( 0% - (var(--avatar-progress) * 35vw) ));
+        translateX(calc( 0% + (var(--avatar-progress) * 35vw) ))
+        translateY(calc( 0% - (var(--avatar-progress) * 1.5rem) ));
+      
+      will-change: transform;
     }
 
     .avatar-img {
@@ -166,21 +168,32 @@ import Contatti from '../components/Contatti.astro';
       /* Crucial: transform-origin MUST be bottom center so it shrinks towards the button */
       transform-origin: bottom center; 
       transform: scale(calc( 1 - (var(--avatar-progress) * 0.7) ));
+      
+      /* Opacity logic: Only image fades more strongly */
+      opacity: calc( 1 - (var(--avatar-progress) * 0.8) );
+      will-change: transform, opacity;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Show avatar fully on button interaction */
+    .avatar-wrapper:has(.avatar-btn:hover) .avatar-img,
+    .avatar-wrapper:has(.avatar-btn:active) .avatar-img,
+    .avatar-wrapper:has(.avatar-btn:focus) .avatar-img {
+      opacity: 1 !important;
     }
 
     .avatar-btn {
       /* On mobile, button might need to be smaller or positioned differently */
       font-size: 0.8rem;
       padding: 6px 14px;
-      /* Now that image shrinks downwards, button is naturally close. 
-         Add a bit of negative margin or translation if needed to snug it up, 
-         or positive margin if too close. 
-         Since img is 70% shrunk, it might be weirdly close or far depending on layout.
-         Testing: It should be fine. Maybe remove negative margin from before?
-         User said "too much distance".
-      */
       margin-top: 5px; /* Tiny gap */
-      opacity: calc( (var(--avatar-progress) - 0.9) * 10 ); /* Show very late */
+      /* Ensure it stays readable but respects parent opacity fade */
+      opacity: calc( (var(--avatar-progress) - 0.5) * 2 ); /* Make it appear earlier? Or just link it to parent? */
+      /* The user wants "Let's talk" to start appearing. 
+         If I leave it at 0.9, it appears very late.
+         Maybe appearing earlier (0.5) is better since it's staying at the bottom?
+         Let's try updating it to appear around 0.5 progress */
+      opacity: calc( (var(--avatar-progress) - 0.2) * 5 ); /* Custom logic to ensure visibility */
       /* Ensure it stays readable */
       white-space: nowrap;
     }
