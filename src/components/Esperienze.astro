@@ -5,24 +5,14 @@ const experiences = [
     company: "Asernet",
     location: "Foggia",
     period: "2025 - Present",
-    description: "In Asernet mi occupo di analisi dei dati, sviluppo software e automazioni intelligenti. Lavoro a progetti che integrano intelligenza artificiale e digital strategy, collaborando con team marketing e sviluppo per creare strumenti data-driven e piattaforme di innovazione digitale.",
-    details: [
-      {
-        title: "DATA ANALYSIS & DATA VISUALIZATION",
-        text: "Progetto e sviluppo dashboard dinamiche per analizzare dati provenienti da GA4, Prestashop, CRM e Google Ads. Mi occupo di studiare, pulire e centralizzare i dati in un data warehouse unificato, trasformandoli in insight chiari e comprensibili anche per manager non tecnici."
-      },
-      {
-        title: "AUTOMAZIONI E AGENTI AI",
-        text: "Sviluppo e integrazione di agenti AI avanzati per l'automazione dei processi aziendali, riducendo le attività ripetitive e potenziando le capacità decisionali del team."
-      }
-    ]
+    description: "Qui lavoro sull’integrazione tra AI, dati e marketing strategico.<br/><br/>Progetto data warehouse.<br/>Costruisco dashboard leggibili anche per chi non è tecnico.<br/>Sviluppo agenti AI che supportano analisi e operatività.<br/><br/>Il mio ruolo è rendere il dato utilizzabile.<br/>Non più un archivio.<br/>Ma uno strumento di orientamento."
   },
   {
     role: "Hyperautomation Developer",
     company: "Sprint Reply",
     location: "Milano",
     period: "2022 - 2025",
-    description: "Durante la mia esperienza in Reply, mi sono specializzata nella Robotic Process Automation (RPA), progettando soluzioni automatizzate per grandi realtà aziendali. Questa fase mi ha insegnato il valore della struttura, dell’ottimizzazione e della scalabilità, competenze che oggi applico in contesti più fluidi e creativi."
+    description: "È stata la mia scuola di rigore.<br/><br/>RPA, processi enterprise, scalabilità, efficienza.<br/>Qui ho imparato che ogni automazione è prima di tutto un’analisi profonda del processo.<br/><br/>Oggi applico quella disciplina in contesti più dinamici,<br/>dove AI e strategia si intrecciano."
   }
 ];
 ---
@@ -40,7 +30,7 @@ const experiences = [
           <div class="timeline-content">
             <span class="period">{exp.period}</span>
             <h3>{exp.role} <span class="company">@ {exp.company}, {exp.location}</span></h3>
-            <p>{exp.description}</p>
+            <p set:html={exp.description}></p>
             {exp.details && (
               <div class="experience-details">
                 {exp.details.map(detail => (

@@ -35,7 +35,7 @@ const navItems = [
     background: rgba(15, 15, 15, 0.85); /* Glass effect dark */
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    z-index: 1000;
+    z-index: 10000; /* Ensure header is on top of EVERYTHING */
     display: flex;
     align-items: center;
   }
@@ -128,7 +128,7 @@ const navItems = [
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 1000; /* Ensure it stays above other content but below button */
+      z-index: 9999; /* Below button but above everything else */
       transition: opacity 0.3s ease;
       /* If display:none is used, transition won't show on open, but at least background will appear */
     }
@@ -139,7 +139,7 @@ const navItems = [
 
     .mobile-menu-btn {
       display: flex;
-      z-index: 1001; /* Ensure button is above menu */
+      z-index: 10001; /* Above menu */
     }
 
     /* Make links larger for touch */

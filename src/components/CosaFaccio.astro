@@ -2,22 +2,22 @@
 const services = [
   {
     title: "Automation & AI",
-    description: "Sviluppo e integrazione di assistenti intelligenti e processi automatizzati",
+    description: "Progetto agenti intelligenti e sistemi automatizzati integrati nei processi aziendali.<br/><br/>L’obiettivo è ridurre dispersioni operative e migliorare la coerenza decisionale.",
     icon: "cpu"
   },
   {
     title: "Data Analysis & Dashboarding",
-    description: "Analisi strategiche e report visivi per decisioni data-driven",
+    description: "Costruisco ambienti di analisi che trasformano dati eterogenei in indicatori comprensibili.<br/><br/>Dalla raccolta alla visualizzazione, ogni passaggio è pensato per supportare scelte concrete.",
     icon: "bar-chart"
   },
   {
     title: "Software & Web Development",
-    description: "Custom software e piattaforme web.",
+    description: "Sviluppo piattaforme e applicazioni su misura, progettate per dialogare con infrastrutture esistenti e crescere nel tempo.",
     icon: "code"
   },
   {
     title: "Digital Innovation & Communication",
-    description: "Strategie di marketing e comunicazione basate su dati e creatività",
+    description: "Integro strumenti digitali e modelli di AI in strategie di marketing e comunicazione.<br/><br/>Perché l’adozione tecnologica è anche un processo culturale.",
     icon: "message-circle" 
   }
 ];
@@ -33,13 +33,23 @@ const services = [
     <div class="intro-content">
       <div class="intro-text">
         <p>
-          Mi occupo di <strong class="highlight">AI e automazioni</strong>, <strong class="highlight">analisi dei dati</strong> e <strong class="highlight">sviluppo di piattaforme web</strong>, accompagnando le imprese nella loro evoluzione digitale.
+          Quando entro in un progetto, il mio primo compito non è sviluppare.<br/>
+          <strong>È comprendere.</strong>
         </p>
         <p>
-          Aiutare a comprendere e utilizzare il digitale in modo pratico, accessibile e coerente con la loro identità è la mia <strong>MISSIONE</strong>.
+          Analizzo flussi operativi.<br/>
+          Osservo come circolano le informazioni.<br/>
+          Individuo dove si genera attrito.
         </p>
         <p>
-          Coniugo tecnica e visione strategica: Analizzo dati e progetto dashboard per ottenere insight necessari a migliorare la strategia, sviluppo software e creo <strong class="highlight">workflow intelligenti</strong> per migliorare processi e produttività.
+          Poi progetto soluzioni che rendano il sistema <strong>più leggibile, più stabile, più efficace.</strong>
+        </p>
+        <p>
+          Lavoro su intelligenza artificiale, automazione, dati e piattaforme digitali.<br/>
+          Ma il risultato finale non è una tecnologia in più.
+        </p>
+        <p>
+          <strong class="highlight">È una struttura più chiara.</strong>
         </p>
       </div>
 
@@ -61,7 +71,7 @@ const services = [
              <div class="icon-circle"></div>
           </div>
           <h3>{service.title}</h3>
-          <p>{service.description}</p>
+          <p set:html={service.description}></p>
         </div>
       ))}
     </div>
