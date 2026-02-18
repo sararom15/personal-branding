@@ -108,20 +108,79 @@ import Contatti from '../components/Contatti.astro';
   /* Increased breakpoint to ensure smaller laptops get the "safe" stacked layout */
   @media (max-width: 1199px) {
     #global-avatar-container {
-      position: absolute; 
-      height: 80vh; /* Increased from 60vh to keep image large */
-      top: var(--header-height); 
-      z-index: 1;
+      position: fixed; /* Keep it fixed so it stays when scrolling initially or use absolute if preferred, but fixed is better for "starting position" feel */
+      height: 100dvh; /* Full viewport height */
+      top: auto;
+      bottom: 0;      /* Anchor to bottom */
+      left: 0;
+      width: 100%;
+      z-index: 0;    /* Move behind content (z-index 10) */
       justify-content: center;
-      align-items: flex-start;
-      padding-top: 2rem;
+      align-items: flex-end; /* Align image to bottom */
+      padding-top: 0;
     }
     
     .avatar-img {
-      height: 100%;
-      /* Removed max-height constraint to prevent sudden shrink */
-      transform: none !important;
-      opacity: calc(1 - var(--avatar-progress) * 3); /* Quick fade */
+      height: 65vh;   /* Reduced to keep face below the text */
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: bottom center;
+      
+      /* Mobile Scroll Animation: move to Top-Left */
+      /* 
+         Logic:
+         - Start (0): Bottom Center
+         - End (1): Top Left, Scale 0.3
+         - TranslateY: Move UP by less distance to stay below header (was 85vh, now 75vh).
+         - TranslateX: Move LEFT by 35vw.
+      */
+      transform: 
+        translateY(calc( 0% - (var(--avatar-progress) * 75vh) ))
+        translateX(calc( 0% - (var(--avatar-progress) * 35vw) ))
+        scale(calc( 1 - (var(--avatar-progress) * 0.7) ));
+      
+      transform-origin: bottom center; 
+      opacity: 1; 
+      pointer-events: none; /* Ensure clicks pass through */
+      z-index: 1000; /* Bring it to front (above text content) but check against header (also 1000) */
+    }
+    
+    /* Ensure it is above the header if desired, or below? 
+       If header is 1000, and this is 1000, stacking order depends on DOM.
+       Header is usually top of DOM? No, Layout puts Header first.
+       So this comes AFTER header in DOM (inside main usually? No, global-avatar is outside main).
+       Wait, global-avatar is inside Layout, before main.
+       Header is inside Layout, before slot.
+       
+       Structure:
+       Layout
+         Head
+         Body
+           Header
+           global-avatar-container
+           Main
+           Footer
+       
+       So global-avatar is AFTER Header. z-index 1000 vs 1000 -> Avatar wins (on top).
+       Use z-index 1001 to be safe if we want it ON TOP.
+       Use z-index 999 if we want it BELOW.
+       
+       User said "sotto l'header" (under the header) as a problem.
+       I'll try z-index 1002 to prove it can be seen, or adjust Y to be physically below.
+       
+       Let's stick to "Small top-left" (piccola in alto a sx).
+       If I put it Z-1002, it covers the Logo/Menu? 
+       The Logo is on the Left. The Menu is on the Right.
+       Top Left = Logo.
+       
+       Maybe I should move it to Center-Left or just below the header?
+       
+       Let's try positioning it visibly below the header first (Y adjustment).
+    */
+    #global-avatar-container {
+      /* ... existing styles ... */
+      z-index: 1001; /* Ensure it is visible on top of text */
     }
   }
 

@@ -118,10 +118,71 @@ const navItems = [
 
   @media (max-width: 900px) {
     .nav-list {
-      display: none; /* TODO: Implement Mobile Menu logic if needed */
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw; /* Use vw to be sure */
+      height: 100vh;
+      background-color: var(--color-bg); /* Correct variable name */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000; /* Ensure it stays above other content but below button */
+      transition: opacity 0.3s ease;
+      /* If display:none is used, transition won't show on open, but at least background will appear */
     }
+
+    .nav-list.is-active {
+      display: flex;
+    }
+
     .mobile-menu-btn {
       display: flex;
+      z-index: 1001; /* Ensure button is above menu */
+    }
+
+    /* Make links larger for touch */
+    .nav-link {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .logo {
+      display: none; /* Hide logo on mobile as requested, since avatar becomes the "logo" */
     }
   }
 </style>
+
+<script>
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navList = document.querySelector('.nav-list');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (menuBtn && navList) {
+      menuBtn.addEventListener('click', () => {
+        navList.classList.toggle('is-active');
+        menuBtn.classList.toggle('is-active');
+        
+        // Toggle body scroll to prevent background scrolling
+        document.body.style.overflow = navList.classList.contains('is-active') ? 'hidden' : '';
+
+        // Update aria-expanded
+        const isExpanded = navList.classList.contains('is-active');
+        menuBtn.setAttribute('aria-expanded', isExpanded.toString());
+      });
+
+      // Close menu when a link is clicked
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navList.classList.remove('is-active');
+          menuBtn.classList.remove('is-active');
+          document.body.style.overflow = ''; // Restore scroll
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  });
+</script>
