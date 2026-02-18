@@ -1,7 +1,9 @@
 ---
+import InteractiveBackground from './InteractiveBackground.astro';
 ---
 <section id="contatti">
-  <div class="container">
+  <InteractiveBackground />
+  <div class="container contact-content">
     <div class="section-header">
       <h2 class="section-title">Connettiamoci!</h2>
       <p class="section-subtitle">Diamo vita a grandi idee!</p>
@@ -33,6 +35,16 @@
 </section>
 
 <style>
+  #contatti {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-content {
+     position: relative;
+     z-index: 2;
+  }
+
   .contact-container {
     max-width: 800px;
     margin: 0 auto;

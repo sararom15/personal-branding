@@ -1,0 +1,169 @@
+---
+---
+<div class="canvas-container">
+  <canvas class="interactive-bg"></canvas>
+</div>
+
+<script>
+  // Encapsulate the entire logic in a function to run for EACH canvas
+  function initInteractiveBackgrounds() {
+    const canvases = document.querySelectorAll('.interactive-bg');
+    
+    canvases.forEach(canvas => {
+        // Prevent re-initialization if already initialized (optional safety)
+        if (canvas.dataset.initialized) return;
+        canvas.dataset.initialized = 'true';
+
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationFrameId;
+
+        // Configuration
+        const colors = ['#FF5C00', '#FF5C00', '#ffffff', '#333333']; 
+
+        let mouse = {
+            x: undefined, 
+            y: undefined,
+            radius: 150
+        }
+
+        function resize() {
+            // Check if parent still exists
+            if (!canvas.parentElement) return;
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            initParticles();
+        }
+
+        // Mouse tracking specific to this canvas instance
+        // We attach listener to document but check bounding rect of THIS canvas
+        const mouseHandler = (event) => {
+            const rect = canvas.getBoundingClientRect();
+            // Check if canvas is visible/in viewport-ish area to avoid calculations if far away? 
+            // Actually just check if mouse is near/inside
+            if (event.clientY >= rect.top - 100 && event.clientY <= rect.bottom + 100) {
+                mouse.x = event.clientX - rect.left;
+                mouse.y = event.clientY - rect.top;
+            } else {
+                mouse.x = undefined;
+                mouse.y = undefined;
+            }
+        };
+
+        document.addEventListener('mousemove', mouseHandler);
+        window.addEventListener('resize', resize);
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.2; 
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            }
+
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+
+                if (mouse.x !== undefined) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (distance < mouse.radius + this.size) {
+                        if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                            this.x += 3;
+                        }
+                        if (mouse.x > this.x && this.x > this.size * 10) {
+                            this.x -= 3;
+                        }
+                        if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                            this.y += 3;
+                        }
+                        if (mouse.y > this.y && this.y > this.size * 10) {
+                            this.y -= 3;
+                        }
+                    }
+                }
+
+                this.x += this.directionX;
+                this.y += this.directionY;
+
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const density = (canvas.width * canvas.height) / 10000;
+            let numberOfParticles = density; 
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 3) + 2; 
+                let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1) - 0.5; 
+                let directionY = (Math.random() * 1) - 0.5; 
+                let color = colors[Math.floor(Math.random() * colors.length)];
+
+                particles.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animate() {
+            // Check if canvas is still in DOM to stop animation leaks
+            if (!document.contains(canvas)) return;
+            
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+            }
+        }
+
+        resize();
+        animate();
+    });
+  }
+
+  // Run initialisation
+  initInteractiveBackgrounds();
+  
+  // Astro view transitions might require re-running if navigating (if SPA mode is used later)
+  document.addEventListener('astro:page-load', initInteractiveBackgrounds);
+</script>
+
+<style>
+  .canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; 
+    overflow: hidden;
+    pointer-events: none; 
+  }
+  
+  .interactive-bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

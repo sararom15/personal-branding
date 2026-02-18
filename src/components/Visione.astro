@@ -1,6 +1,8 @@
 ---
+import InteractiveBackground from './InteractiveBackground.astro';
 ---
 <section id="visione">
+  <InteractiveBackground />
   <div class="container vision-content">
     <div class="section-header">
       <h2 class="section-title">La mia Visione</h2>
@@ -47,8 +49,15 @@
 </section>
 
 <style>
+  #visione {
+      position: relative;
+      overflow: hidden;
+  }
+
   .vision-content {
     text-align: center;
+    position: relative;
+    z-index: 2;
   }
 
   .vision-card {

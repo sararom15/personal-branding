@@ -1,4 +1,6 @@
 ---
+import InteractiveBackground from './InteractiveBackground.astro';
+
 const education = [
   {
     institution: "Università LUMSA, Roma",
@@ -28,6 +30,7 @@ const education = [
 ---
 
 <section id="formazione">
+  <InteractiveBackground />
   <div class="container small-container">
     <div class="section-header">
       <h2 class="section-title">Formazione</h2>
@@ -70,6 +73,16 @@ const education = [
 </section>
 
 <style>
+  #formazione {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
   .small-container {
     max-width: 800px;
   }

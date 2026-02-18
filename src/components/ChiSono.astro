@@ -1,7 +1,10 @@
 ---
+import InteractiveBackground from './InteractiveBackground.astro';
 ---
 <section id="chi-sono" class="section-alt">
-  <div class="container">
+  <InteractiveBackground />
+  <div class="container content-container">
+
     <div class="section-header">
       <h2 class="section-title">Chi Sono</h2>
       <p class="section-subtitle">L'UMANITÀ DIETRO LA TECNOLOGIA</p>
@@ -55,6 +58,13 @@
 <style>
   .section-alt {
     background-color: var(--color-surface);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .content-container {
+    position: relative;
+    z-index: 2;
   }
 
   .content-grid {
