@@ -1,133 +1,108 @@
 ---
+import { ArrowUpRight, Phone } from '@lucide/astro';
+import SocialIcon from './SocialIcon.astro';
 import InteractiveBackground from './InteractiveBackground.astro';
+const socials = [
+  { name: 'WhatsApp', url: 'https://wa.me/393273921925' },
+  { name: 'Telefono', url: 'tel:+393273921925' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/sara-romano-1368591b7' },
+  { name: 'Instagram', url: 'https://www.instagram.com/rasa_noma/' },
+  { name: 'Facebook', url: 'https://www.facebook.com/sara.romano.503/' },
+  { name: 'GitHub', url: 'https://github.com/sararom15' },
+];
 ---
-<section id="contatti">
-  <InteractiveBackground />
-  <div class="container contact-content">
-    <div class="section-header">
-      <h2 class="section-title">Connettiamoci!</h2>
-      <p class="section-subtitle">Diamo vita a grandi idee!</p>
+<section id="contatti" aria-labelledby="contact-title" tabindex="-1">
+  <InteractiveBackground tone="ivory" />
+  <div class="contact-orbits" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="container">
+    <div class="contact-top"><span class="eyebrow">05 / Il prossimo passo</span><span class="contact-note">Le buone idee iniziano<br />da una conversazione.</span></div>
+    <div class="contact-grid">
+      <div class="section-header"><h2 id="contact-title">Hai un’idea?<br /><em>Diamole direzione.</em></h2><p>Se anche tu credi in un modo di lavorare in cui tecnologia, curiosità e valori umani convivono, mi farà piacere conoscerti.</p></div>
+      <a class="contact-arrow" href="mailto:sara.romano.15@gmail.com" aria-label="Scrivi un’email a Sara Romano"><ArrowUpRight size={76} stroke-width={.75}/></a>
     </div>
-    <div class="contact-container">
-      <div class="contact-text">
-        <p>
-          Se anche tu credi in un modo di lavorare in cui tecnologia, curiosità e valori umani convivono, mi farà piacere conoscerti.
-        </p>
-          <div class="contact-methods">
-            <div class="method">
-              <strong>Canali</strong>
-              <div class="social-links">
-                <a href="mailto:sara.romano.15@gmail.com" aria-label="Email">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/sara-romano-1368591b7" target="_blank" aria-label="LinkedIn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                </a>
-                <a href="https://www.instagram.com/rasa_noma/" target="_blank" aria-label="Instagram">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                </a>
-                <a href="https://www.facebook.com/sara.romano.503/" target="_blank" aria-label="Facebook">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                </a>
-                <a href="https://github.com/sararom15" target="_blank" aria-label="GitHub">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                </a>
-              </div>
-            </div>
-        </div>
+    <div class="contact-bottom">
+      <a class="email-link" href="mailto:sara.romano.15@gmail.com">sara.romano.15@gmail.com <ArrowUpRight size={22} stroke-width={1}/></a>
+      <div class="social-links">
+        {socials.map(social => (
+          <a href={social.url} target={social.url.startsWith('https:') ? '_blank' : undefined} rel={social.url.startsWith('https:') ? 'noopener noreferrer' : undefined} aria-label={social.name} title={social.name}>
+            {social.name === 'Telefono' ? <Phone size={19} stroke-width={1.3} aria-hidden="true" /> : <SocialIcon name={social.name}/>}
+          </a>
+        ))}
       </div>
     </div>
   </div>
 </section>
-
+<script>
+  const arrow = document.querySelector<HTMLAnchorElement>('.contact-arrow');
+  const pointerMotion = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+  if (arrow) {
+    let bounds: DOMRect | null = null;
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    const reset = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      bounds = null;
+      arrow.style.removeProperty('--arrow-x');
+      arrow.style.removeProperty('--arrow-y');
+      arrow.style.removeProperty('--ring-angle');
+    };
+    arrow.addEventListener('pointerenter', () => {
+      if (pointerMotion.matches) bounds = arrow.getBoundingClientRect();
+    });
+    arrow.addEventListener('pointermove', event => {
+      if (!pointerMotion.matches || event.pointerType !== 'mouse') return;
+      bounds ??= arrow.getBoundingClientRect();
+      x = Math.max(-.5, Math.min(.5, (event.clientX - bounds.left) / bounds.width - .5));
+      y = Math.max(-.5, Math.min(.5, (event.clientY - bounds.top) / bounds.height - .5));
+      if (!frame) frame = requestAnimationFrame(() => {
+        frame = 0;
+        arrow.style.setProperty('--arrow-x', `${x * 8}px`);
+        arrow.style.setProperty('--arrow-y', `${y * 8}px`);
+        arrow.style.setProperty('--ring-angle', `${x * 32 - y * 16}deg`);
+      });
+    }, { passive: true });
+    arrow.addEventListener('pointerleave', reset);
+    arrow.addEventListener('pointercancel', reset);
+    window.addEventListener('scroll', reset, { passive: true });
+    window.addEventListener('resize', reset, { passive: true });
+    pointerMotion.addEventListener('change', reset);
+  }
+</script>
 <style>
-  #contatti {
-    position: relative;
-    overflow: hidden;
+  #contatti > .container { z-index: 1; }
+  #contatti { position: relative; overflow: hidden; background: #ad4e2b; color: #fff9ed; padding-bottom: 3rem; }
+  .contact-top { position: relative; display: flex; justify-content: space-between; align-items: start; margin-bottom: 4rem; }
+  .contact-top .eyebrow { color: #f3d9c8; }
+  .contact-note { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .09em; line-height: 1.7; text-align: right; }
+  .contact-grid { display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
+  .section-header { margin-bottom: 3.5rem; }
+  h2 { font-size: clamp(3.5rem, 6.5vw, 6.5rem); line-height: 1; }
+  h2 em { color: #f5d5bc; }
+  .section-header p { color: #f7e4d7; font-size: 1rem; max-width: 450px; margin: 2rem 0 0; }
+  .contact-arrow { position: relative; display: grid; place-items: center; width: 140px; height: 140px; border: 1px solid #e2b79e; border-radius: 50%; flex-shrink: 0; transition: background .3s, transform .3s; }
+  .contact-arrow:hover, .contact-arrow:focus-visible { color: #ad4e2b; background: #fff9ed; }
+  .contact-arrow:focus-visible { outline-color: #fff9ed; }
+  .contact-bottom { border-top: 1px solid #cc8666; padding-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; }
+  .email-link { display: inline-flex; align-items: center; gap: 1.25rem; font-size: clamp(.9rem,1.6vw,1.5rem); }
+  .email-link:hover { color: #f5d5bc; }
+  .social-links { display: flex; flex-wrap: wrap; gap: .65rem; }
+  .social-links a { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border: 1px solid #cc8666; border-radius: 50%; }
+  .social-links a:hover, .social-links a:focus-visible { color: #ad4e2b; background: #fff9ed; }
+  .social-links a:focus-visible { outline-color: #fff9ed; }
+  .contact-orbits { position: absolute; width: 650px; height: 650px; right: -270px; top: -270px; pointer-events: none; }
+  .contact-orbits span { position: absolute; inset: 0; border: 1px solid rgb(255 240 219 / 13%); border-radius: 50%; }
+  .contact-orbits span:nth-child(2) { inset: 40px; } .contact-orbits span:nth-child(3) { inset: 80px; }
+  @media (max-width: 767px) { .contact-top { margin-bottom: 3rem; gap: 1rem; } .contact-note { font-family: var(--font-mono); font-size: .75rem; } .contact-grid { gap: 1rem; } h2 { font-size: clamp(2.8rem,10.7vw,4rem); } .section-header p { font-size: 1.0625rem; } .contact-arrow { display: none; } .contact-bottom { flex-direction: column; align-items: start; gap: 1.3rem; } .email-link { font-size: .97rem; gap: .5rem; } .section-header { margin-bottom: 2.5rem; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .contact-arrow::before { content: ''; position: absolute; inset: -9px; border: 1px solid #f5d5bc; border-bottom-color: transparent; border-left-color: transparent; border-radius: 50%; opacity: 0; transform: rotate(-50deg); transition: opacity .35s, transform .65s cubic-bezier(.22,1,.36,1); pointer-events: none; }
+    .contact-arrow:focus-visible::before { opacity: .65; transform: rotate(0deg); }
+    .contact-arrow :global(svg) { transition: transform .35s cubic-bezier(.22,1,.36,1); }
+    .contact-arrow:focus-visible :global(svg) { transform: translate(2px, -2px); }
   }
-
-  .contact-content {
-     position: relative;
-     z-index: 2;
-  }
-
-  .contact-container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .highlight {
-    color: var(--color-primary);
-  }
-
-  .contact-text p {
-    font-size: 1.25rem;
-    color: var(--color-text-muted);
-    margin: 0 auto 3rem auto;
-    line-height: 1.6;
-    max-width: 600px;
-  }
-
-  .contact-methods {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .method {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .method strong {
-    display: block;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    letter-spacing: 1px;
-  }
-
-  .method a {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .method a:hover {
-    color: var(--color-primary);
-  }
-
-  .social-links {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .social-links a {
-    display: block; 
-    /* Remove text styles for links */
-    font-size: 0;
-    border-bottom: none;
-    padding: 0;
-  }
-
-  .social-links svg {
-    width: 32px;
-    height: 32px;
-    stroke: var(--color-text);
-    transition: all 0.3s ease;
-  }
-
-  .social-links a:hover svg {
-    stroke: var(--color-primary);
-    transform: translateY(-3px);
-    filter: drop-shadow(0 0 5px rgba(255, 92, 0, 0.4));
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .contact-arrow:hover::before { opacity: .65; transform: rotate(var(--ring-angle, 0deg)); }
+    .contact-arrow:hover :global(svg) { transform: translate(var(--arrow-x, 0px), var(--arrow-y, 0px)); }
   }
 </style>

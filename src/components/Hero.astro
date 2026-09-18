@@ -1,146 +1,156 @@
-<section id="hero" class="hero-section">
-  <div class="sticky-container">
-    <div class="content-wrapper">
-      
-      <!-- Aphorism - Top Right -->
-      <p class="aphorism">
-        “La vera innovazione nasce quando<br/>la tecnologia impara a parlare<br/>il linguaggio delle persone”
-      </p>
-
-      <!-- Text Layer (Foreground) -->
-      <div class="text-layer">
-        <h1 class="main-title">Sara Romano <br/> <span class="highlight-role">AI Engineer | Digital Innovation & Communication</span></h1>
-        <h2 class="role-title">Based in Puglia</h2>
-        
-        <div class="cta-group">
-
-          <a href="#contatti" class="btn btn-outline">Connettiamoci!</a>
-        </div>
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, ChartNoAxesColumnIncreasing, Lightbulb, Target, UsersRound } from '@lucide/astro';
+import hero from '../assets/sara-hero-editorial.png';
+const areas = [
+  { title: 'Data & AI', detail: 'Dal dato alla decisione', Icon: ChartNoAxesColumnIncreasing, href: '#ai' },
+  { title: 'Innovation', detail: 'Idee in soluzioni reali', Icon: Lightbulb, href: '#innovation' },
+  { title: 'Digital strategy', detail: 'Piani che generano valore', Icon: Target, href: '#innovation' },
+  { title: 'Communication', detail: 'Storie che connettono', Icon: UsersRound, href: '#communication' },
+];
+---
+<section id="hero" class="hero-section" aria-labelledby="hero-title">
+  <div class="hero-stage">
+    <div class="hero-art">
+      <Image src={hero} alt="Sara Romano durante un intervento, seduta al microfono" widths={[640, 960, 1440, 1920]} sizes="100vw" width={1920} format="webp" quality={85} loading="eager" fetchpriority="high" />
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-values" aria-label="People, data, innovation, impact">People <span>×</span> Data <span>×</span> Innovation <span>×</span> Impact</div>
+    <svg class="data-landscape" viewBox="0 0 420 460" fill="none" aria-hidden="true">
+      <g stroke="currentColor" stroke-width=".65" opacity=".48">
+        {Array.from({ length: 12 }, (_, i) => <path pathLength="1" style={`--trace-order: ${i}`} d={`M0 ${300 + i * 7} C 110 ${340 + i * 2}, 220 ${55 + i * 8}, 420 ${38 + i * 10}`} />)}
+        <path pathLength="1" style="--trace-order: 4" d="M18 283 82 227 143 247 192 180 229 110 286 132 321 213 396 174" />
+        <path pathLength="1" style="--trace-order: 7" d="M82 227 104 323 167 349 228 268 252 301 286 132" />
+      </g>
+      <g fill="currentColor"><circle cx="82" cy="227" r="3.2"/><circle cx="143" cy="247" r="4"/><circle cx="192" cy="180" r="3"/><circle cx="229" cy="110" r="3.4"/><circle cx="321" cy="213" r="3.2"/><circle cx="228" cy="268" r="5"/><circle cx="396" cy="174" r="2.8"/></g>
+      <g fill="#77746c"><circle cx="104" cy="323" r="2.5"/><circle cx="167" cy="349" r="3"/><circle cx="252" cy="301" r="2.5"/></g>
+    </svg>
+    <div class="hero-copy container">
+      <p class="hero-kicker">AI, strategia <br />e comunicazione</p>
+      <h1 id="hero-title"><span class="hero-title-line">“La vera innovazione nasce quando</span> <span class="hero-title-line">la tecnologia impara a parlare</span> <em class="hero-title-line">il linguaggio delle persone”</em></h1>
+      <p class="hero-description">Strategia, dati, AI e comunicazione<br class="desktop-break" /> digitale per trasformare la complessità<br class="desktop-break" /> in opportunità concrete.</p>
+      <a href="#esperienze" class="btn btn-primary"><span class="cta-desktop">Scopri il mio percorso</span><ArrowRight size={24} stroke-width={1} /></a>
+    </div>
+    <div class="hero-margin" aria-hidden="true"><span>Ideas<br />Data<br />People<br />Impact</span><i></i></div>
+  </div>
+  <div class="expertise-strip">
+    <div class="container expertise-content">
+      <div class="expertise-links">
+        {areas.map(area => <a class="expertise-item" href={area.href}><area.Icon size={32} stroke-width={1.1}/><span>{area.title}<small>{area.detail}</small></span></a>)}
       </div>
-
+      <p class="future-note">A more<br />human tech<br />future</p>
     </div>
   </div>
 </section>
-
 <style>
-  .hero-section {
-    min-height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center; /* keep center alignment generally */
-  }
-
-  .sticky-container {
-    width: 100%;
-  }
-
-  .content-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    height: 100vh; /* Full viewport height to allow absolute positioning relative to screen */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Default center */
-  }
-
-  /* TEXT LAYER */
-  .text-layer {
-    position: relative;
-    z-index: 1010; /* Ensure text is above the global avatar (z-index 1001) */
-    max-width: 800px;
-    margin: 0 auto; 
-    text-align: center;
-    /* Push text down visually to be "below the face" */
-    margin-top: 45vh; /* Push down significantly */
-    transform: translateY(-20%); /* Fine tune */
-  }
-
-  .main-title {
-    font-size: 3.5rem; /* Reduced from 5rem */
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-  }
-
-  .highlight-role {
-    font-size: 2rem;
-    display: block;
-    margin-top: 0.5rem;
-    color: var(--color-primary);
-  }
-
-  .role-title {
-    font-size: 1rem; /* Reduced from 1.2rem */
-    color: var(--color-primary);
-    font-weight: 500;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-  }
-
-  .aphorism {
-    position: absolute;
-    top: 120px;
-    left: 1.5rem; /* Moved to Left */
-    max-width: 350px; /* Increased from 250px */
-    text-align: left; /* Aligned Left */
-    font-size: 1.2rem; /* Increased from 0.8rem */
-    font-style: italic;
-    color: #e0e0e0;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-    z-index: 10;
-    opacity: 0.8;
-  }
-
-  .cta-group {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  /* Mobile */
-  /* Mobile */
-  @media (max-width: 900px) {
-    .content-wrapper {
-      justify-content: flex-start; /* Align content to top */
+  .hero-kicker, .hero-description, .hero-values, .hero-margin, .expertise-item > span, .future-note { font-family: var(--font-mono); }
+  .hero-values { letter-spacing: .12em; }
+  .expertise-item > span { letter-spacing: .07em; }
+  .future-note { letter-spacing: .2em; }
+  .hero-section { padding: 0; }
+  .hero-stage { position: relative; isolation: isolate; min-height: 640px; height: min(780px, 47vw); overflow: hidden; background: #f7f4ee; }
+  .hero-art { position: absolute; inset: 64px 7% 0 10%; z-index: -3; }
+  .hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: center 28%; mask-image: linear-gradient(90deg, transparent, #000 14%, #000 92%, transparent); }
+  .hero-shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, #f7f4ee 0%, rgb(247 244 238 / 95%) 13%, rgb(247 244 238 / 75%) 29%, transparent 47%); }
+  .hero-values { position: absolute; top: 137px; right: 4.5%; display: flex; align-items: center; gap: .85rem; font-size: .6875rem; text-transform: uppercase; letter-spacing: .21em; }
+  .hero-values span { color: var(--color-primary); font-size: .8rem; }
+  .hero-copy { padding-top: clamp(138px, 10vw, 170px); padding-bottom: 2.5rem; pointer-events: none; }
+  .hero-copy a { pointer-events: auto; }
+  .hero-kicker { font-size: .7rem; letter-spacing: .36em; text-transform: uppercase; line-height: 1.65; margin-bottom: 1.5rem; }
+  .hero-kicker::before { content: ''; display: block; width: 42px; height: 2px; background: var(--color-primary); margin-bottom: 1rem; }
+  h1 { font-size: clamp(2rem, 3.1vw, 3.5rem); font-style: italic; letter-spacing: -.035em; line-height: 1.08; margin: 0 0 1.5rem; }
+  .hero-title-line { display: block; }
+  .hero-description { font-size: clamp(.875rem, 1.03vw, 1rem); line-height: 1.55; color: var(--color-text-muted); margin-bottom: 1.6rem; max-width: 370px; }
+  .hero-copy .btn { padding-inline: 1.8rem; min-height: 54px; }
+  .data-landscape { position: absolute; right: -3%; top: 19%; width: 30%; height: 67%; color: #ae5b36; z-index: -1; mask-image: linear-gradient(90deg, transparent, #000 24%); }
+  .hero-margin { position: absolute; right: 4.5%; top: 51%; font-size: .625rem; line-height: 1.9; letter-spacing: .4em; text-transform: uppercase; color: var(--color-text-muted); }
+  .hero-margin i { display: block; height: 78px; width: 1px; background: #a49d92; margin: 1.5rem 0 0; }
+  .hero-margin i::before { content: ''; display: block; width: 3px; height: 35px; background: var(--color-primary); }
+  .expertise-strip { background: var(--color-bg); border-bottom: 1px solid var(--color-border); }
+  .expertise-content { display: flex; align-items: center; justify-content: space-between; gap: 3rem; min-height: 118px; }
+  .expertise-links { display: grid; grid-template-columns: repeat(4, 1fr); flex: 1; }
+  .expertise-item { display: flex; align-items: center; gap: 1.1rem; padding: 0 1.7rem; border-right: 1px solid var(--color-border); }
+  .expertise-item:first-child { padding-left: 0; }
+  .expertise-item:last-child { border: 0; }
+  .expertise-item > span { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; }
+  .expertise-item small { display: block; margin-top: .3rem; font-size: .625rem; letter-spacing: .08em; color: var(--color-text-muted); }
+  .future-note { font-size: .7rem; text-transform: uppercase; letter-spacing: .36em; line-height: 1.8; flex-shrink: 0; margin: 0; }
+  .future-note::before { content: ''; display: block; width: 36px; height: 2px; background: var(--color-primary); margin-bottom: .7rem; }
+  @media (max-width: 1199px) { .hero-values { top: 112px; } .expertise-content { gap: 1.25rem; } .expertise-item { padding-inline: 1rem; gap: .7rem; } .expertise-item small { max-width: 110px; } .hero-margin { right: 3%; } }
+  @media (min-width: 768px) and (max-width: 999px) { .hero-stage { height: 680px; } h1 { font-size: clamp(1.7rem, 3.5vw, 2.2rem); } .hero-copy { padding-top: 165px; } .hero-art img { object-position: 57% center; } .hero-shade { background: linear-gradient(90deg,#f7f4ee, rgb(247 244 238 / 85%) 25%, transparent 55%); } .hero-values { right: 5%; font-size: .625rem; } .hero-margin { display: none; } .expertise-content { min-height: 125px; } .future-note { display: none; } .expertise-item > span { font-size: .6875rem; } }
+  @media (max-width: 767px) {
+    .hero-stage {
+      --hero-photo-height: clamp(300px, 93vw, 430px);
+      min-height: 0;
+      height: auto;
     }
-
-    .main-title {
-      font-size: 2rem; /* Significantly reduced */
-      margin-bottom: 0.25rem;
+    .hero-art {
+      inset: var(--header-height) 0 auto;
+      height: var(--hero-photo-height);
+      z-index: -3;
     }
-
-    .highlight-role {
-      font-size: 1.1rem; /* Reduced */
-      line-height: 1.4;
+    .hero-art img { object-position: 66% 30%; mask-image: none; }
+    .hero-shade {
+      inset: var(--header-height) 0 auto;
+      height: calc(var(--hero-photo-height) + 2px);
+      background: linear-gradient(180deg, transparent 35%, rgb(247 244 238 / 30%) 52%, rgb(247 244 238 / 90%) 76%, var(--color-bg) 97%);
     }
-
-    .role-title {
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
+    .hero-copy {
+      padding-top: calc(var(--header-height) + var(--hero-photo-height) * .61);
+      padding-bottom: 1.5rem;
     }
-
-    .text-layer {
-        position: absolute;
-        top: 100px; /* Force it to the top area */
-        left: 0;
-        right: 0;
-        margin-top: 0; /* Remove the negative margin approach */
-        z-index: 1010;
-        padding: 0 1rem;
-    }
-    
-    .btn {
-       padding: 0.5rem 1rem;
-       font-size: 0.9rem;
-    }
-
-    .aphorism {
-        display: none; 
-    }
+    .hero-kicker { display: flex; align-items: center; gap: .6rem; margin: 0 0 .75rem; font-size: .6875rem; letter-spacing: .17em; }
+    .hero-kicker::before { width: 24px; margin: 0; flex-shrink: 0; }
+    .hero-kicker br, .desktop-break { display: none; }
+    h1 { margin: 0 0 1rem; font-size: clamp(2rem, 8.2vw, 3.1rem); line-height: 1.08; letter-spacing: -.035em; }
+    .hero-title-line { text-wrap: balance; }
+    .hero-description { margin: 0 0 1.25rem; max-width: 36rem; font-size: .9375rem; line-height: 1.6; text-wrap: pretty; }
+    .hero-copy .btn { justify-content: space-between; width: 100%; min-height: 52px; padding: .9rem 1.25rem; gap: 1rem; font-size: 1rem; letter-spacing: .1em; }
+    .hero-copy .btn :global(svg) { width: 23px; height: 23px; }
+    .hero-values, .data-landscape, .hero-margin { display: none; }
+    .expertise-content { padding-block: .75rem; min-height: 0; }
+    .expertise-links { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .25rem 0; }
+    .expertise-item { min-width: 0; min-height: 44px; padding: .35rem .65rem; gap: .6rem; }
+    .expertise-item:nth-child(odd) { padding-left: 0; }
+    .expertise-item:nth-child(even) { border: 0; }
+    .expertise-item :global(svg) { width: 21px; height: 21px; }
+    .expertise-item > span { font-size: .75rem; letter-spacing: .035em; }
+    .expertise-item small, .future-note { display: none; }
   }
+  @media (max-width: 359px) {
+    .hero-stage { --hero-photo-height: 260px; }
+    .hero-kicker { font-size: .625rem; letter-spacing: .1em; gap: .45rem; margin-bottom: .65rem; }
+    .hero-kicker::before { width: 18px; }
+    h1 { font-size: 1.85rem; margin-bottom: .85rem; }
+    .hero-description { font-size: .875rem; line-height: 1.5; margin-bottom: 1rem; }
+    .hero-copy .btn { font-size: .875rem; letter-spacing: .07em; padding-inline: 1rem; gap: .75rem; }
+    .expertise-item { gap: .4rem; padding-inline: .4rem; }
+    .expertise-item :global(svg) { width: 18px; height: 18px; }
+    .expertise-item > span { font-size: .6875rem; letter-spacing: 0; }
+  }
+  @media (min-width: 540px) and (max-width: 767px) and (max-height: 500px) {
+    .hero-art { inset: var(--header-height) 0 0; height: auto; }
+    .hero-art img { object-position: right center; }
+    .hero-shade { inset: var(--header-height) 0 0; height: auto; background: linear-gradient(90deg, var(--color-bg) 35%, rgb(247 244 238 / 90%) 48%, transparent 70%); }
+    .hero-copy { padding-top: calc(var(--header-height) + .5rem); }
+    .hero-kicker { font-size: .625rem; letter-spacing: .1em; }
+    h1 { max-width: 54%; font-size: clamp(2rem, 5.3vw, 2.4rem); }
+    .hero-description { max-width: 50%; font-size: .85rem; }
+    .hero-copy .btn { width: 50%; font-size: .875rem; letter-spacing: .08em; }
+  }
+  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .hero-art { transform: translate3d(0, var(--hero-drift, 0px), 0); }
+    .data-landscape { transform: translate3d(0, var(--data-drift, 0px), 0); }
+  }
+  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .data-landscape[data-trace] path { stroke-dasharray: 1; }
+    .data-landscape[data-trace="ready"] path { stroke-dashoffset: 1; }
+    .data-landscape[data-trace="ready"] circle { opacity: 0; }
+    .data-landscape[data-trace="visible"] path { animation: data-trace 1.8s cubic-bezier(.22,1,.36,1) calc(var(--trace-order, 0) * 45ms) both; }
+    .data-landscape[data-trace="visible"] circle { transform-box: fill-box; transform-origin: center; animation: data-node .7s ease-out .85s both; }
+    .data-landscape[data-trace="visible"] circle:nth-child(3n+2) { animation-delay: 1.05s; }
+    .data-landscape[data-trace="visible"] circle:nth-child(3n) { animation-delay: 1.25s; }
+  }
+  @keyframes data-trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes data-node { from { opacity: 0; transform: scale(.55); } to { opacity: 1; transform: scale(1); } }
 </style>

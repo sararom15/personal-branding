@@ -1,8 +1,12 @@
 ---
 import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import heroImage from '../assets/sara-hero-editorial.png';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
+import PageMotion from '../components/PageMotion.astro';
+import FloatingContact from '../components/FloatingContact.astro';
 
 interface Props {
 	title: string;
@@ -10,6 +14,7 @@ interface Props {
 }
 
 const { title, description = "Personal Branding Website" } = Astro.props;
+const socialImage = await getImage({ src: heroImage, width: 1200, format: 'jpg', quality: 85 });
 ---
 
 <!doctype html>
@@ -18,11 +23,13 @@ const { title, description = "Personal Branding Website" } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href="/LogoSaraRomano_senzaBackground.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-editorial.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-editorial.svg" />
+
+		<meta name="theme-color" content="#f7f4ee" />
+<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
     <!-- Canonical URL -->
@@ -33,14 +40,14 @@ const { title, description = "Personal Branding Website" } = Astro.props;
     <meta property="og:url" content={new URL(Astro.url.pathname, 'https://www.romanosara.com').href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://www.romanosara.com/Sara_SenzaBackground.png" />
+    <meta property="og:image" content={new URL(socialImage.src, 'https://www.romanosara.com').href} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={new URL(Astro.url.pathname, 'https://www.romanosara.com').href} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="https://www.romanosara.com/Sara_SenzaBackground.png" />
+    <meta property="twitter:image" content={new URL(socialImage.src, 'https://www.romanosara.com').href} />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -78,6 +85,8 @@ const { title, description = "Personal Branding Website" } = Astro.props;
 		<Header />
 		<slot />
     <ScrollToTop />
+    <FloatingContact />
 		<Footer />
+    <PageMotion />
 	</body>
 </html>

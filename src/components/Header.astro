@@ -1,200 +1,86 @@
 ---
+import { Menu, X, ArrowUpRight, Download } from '@lucide/astro';
+import Brand from './Brand.astro';
 const navItems = [
-  { name: 'Esperienze', href: '#esperienze', download: false },
-  { name: 'Progetti', href: '#progetti', download: false },
-  { name: 'Scarica il mio CV', href: '/CV_SaraRomano.pdf', download: true },
-  { name: 'Connettiamoci!', href: '#contatti', download: false },
+  { name: 'Chi sono', href: '#chi-sono' },
+  { name: 'Cosa faccio', href: '#cosa-faccio' },
+  { name: 'Il metodo', href: '#metodo' },
+  { name: 'Il percorso', href: '#esperienze' },
 ];
 ---
-
+<a class="skip-link" href="#main-content">Vai al contenuto</a>
 <header class="header">
   <div class="header-container">
-    <a href="#" class="logo">
-      <img src="/LogoSaraRomano_senzaBackground.png" alt="Sara Romano Logo" />
-    </a>
-    <nav class="nav">
-      <ul class="nav-list">
-        {navItems.map(item => (
-          <li>
-            <a 
-              href={item.href} 
-              class="nav-link" 
-              download={item.download ? "" : undefined}
-            >
-              {item.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <button class="mobile-menu-btn" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <a href="#hero" class="logo" aria-label="Sara Romano, inizio pagina"><Brand /></a>
+    <nav class="desktop-nav" aria-label="Navigazione principale">
+      {navItems.map(item => <a href={item.href}>{item.name}</a>)}
+      <a class="contact-link" href="#contatti">Parliamone <ArrowUpRight size={16} stroke-width={1.2}/></a>
+      <a href="/CV_SaraRomano.pdf" download class="cv-link" aria-label="Scarica il mio CV" title="Scarica il mio CV"><Download size={16} stroke-width={1.3}/><span>CV</span></a>
     </nav>
+    <button id="menu-toggle" class="mobile-menu-btn" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu"><Menu size={24} stroke-width={1.3}/></button>
   </div>
+  <div class="reading-progress" aria-hidden="true"></div>
 </header>
-
-<style>
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--header-height);
-    background: rgba(15, 15, 15, 0.85); /* Glass effect dark */
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    z-index: 10000; /* Ensure header is on top of EVERYTHING */
-    display: flex;
-    align-items: center;
-  }
-
-  .header-container {
-    width: 100%;
-    max-width: 100%; /* Full width to align nav to right */
-    margin: 0;
-    padding: 0 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-
-  .logo img {
-    height: 50px; /* Adjust based on header height (80px) */
-    width: auto;
-  }
-
-  .nav {
-    margin-left: auto; /* Force nav to the right */
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-list {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-link {
-    font-size: 0.9rem;
-    font-weight: 500;
-    position: relative;
-    padding-bottom: 4px;
-    color: var(--color-text);
-    text-decoration: none;
-  }
-
-  /* Animated underline */
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--color-primary);
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
-  }
-
-  .nav-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-
-  .mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .mobile-menu-btn span {
-    width: 24px;
-    height: 2px;
-    background-color: var(--color-text);
-  }
-
-  @media (max-width: 1199px) {
-    .nav-list {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw; /* Use vw to be sure */
-      height: 100vh;
-      background-color: var(--color-bg); /* Correct variable name */
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999; /* Below button but above everything else */
-      transition: opacity 0.3s ease;
-      /* If display:none is used, transition won't show on open, but at least background will appear */
-    }
-
-    .nav-list.is-active {
-      display: flex;
-    }
-
-    .mobile-menu-btn {
-      display: flex;
-      z-index: 10001; /* Above menu */
-    }
-
-    /* Make links larger for touch */
-    .nav-link {
-      font-size: 1.5rem;
-      margin: 1rem 0;
-    }
-
-    .logo {
-      display: none; /* Hide logo on mobile as requested, since avatar becomes the "logo" */
-    }
-  }
-</style>
-
+<dialog id="mobile-menu" aria-labelledby="menu-title">
+  <div class="menu-top"><span id="menu-title">Sara Romano</span><button id="menu-close" class="icon-button" type="button" aria-label="Chiudi il menu" autofocus><X size={24}/></button></div>
+  <nav aria-label="Navigazione mobile">
+    {navItems.map((item,index) => <a href={item.href}><span class="menu-number">0{index+1}</span><span>{item.name}</span><ArrowUpRight size={22} stroke-width={1}/></a>)}
+    <a href="#contatti"><span class="menu-number">05</span><span>Parliamone</span><ArrowUpRight size={22} stroke-width={1}/></a>
+  </nav>
+  <div class="menu-bottom"><p>Data · AI · Strategy<br />A more human tech future.</p><a href="/CV_SaraRomano.pdf" download><Download size={17}/> Scarica il CV</a></div>
+</dialog>
 <script>
-  // Wait for DOM to be ready
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const navList = document.querySelector('.nav-list');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    if (menuBtn && navList) {
-      menuBtn.addEventListener('click', () => {
-        navList.classList.toggle('is-active');
-        menuBtn.classList.toggle('is-active');
-        
-        // Toggle body scroll to prevent background scrolling
-        document.body.style.overflow = navList.classList.contains('is-active') ? 'hidden' : '';
-
-        // Update aria-expanded
-        const isExpanded = navList.classList.contains('is-active');
-        menuBtn.setAttribute('aria-expanded', isExpanded.toString());
-      });
-
-      // Close menu when a link is clicked
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          navList.classList.remove('is-active');
-          menuBtn.classList.remove('is-active');
-          document.body.style.overflow = ''; // Restore scroll
-          menuBtn.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-  });
+  const toggle = document.querySelector<HTMLButtonElement>('#menu-toggle');
+  const dialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
+  const close = document.querySelector<HTMLButtonElement>('#menu-close');
+  const desktop = window.matchMedia('(min-width: 1100px)');
+  let previousOverflow = '';
+  if (toggle && dialog && close) {
+    toggle.addEventListener('click', () => {
+      previousOverflow = document.body.style.overflow;
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+      toggle.setAttribute('aria-expanded','true');
+    });
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow;
+      toggle.setAttribute('aria-expanded','false');
+    });
+    dialog.querySelectorAll<HTMLAnchorElement>('a').forEach(link => link.addEventListener('click', () => {
+      dialog.close();
+      const target = link.hash && document.querySelector<HTMLElement>(link.hash);
+      if (target) {
+        target.setAttribute('tabindex','-1');
+        target.focus({preventScroll:true});
+      }
+    }));
+    desktop.addEventListener('change', ({matches}) => { if (matches && dialog.open) dialog.close(); });
+  }
 </script>
+<style>
+  .header { position: fixed; inset: 0 0 auto; height: var(--header-height); z-index: 100; background: rgb(247 244 238 / 80%); transition: background .25s, border-color .25s; border-bottom: 1px solid transparent; }
+  .header.is-scrolled { background: rgb(247 244 238 / 96%); backdrop-filter: blur(16px); border-color: var(--color-border); }
+  .header-container { width: calc(100% - 8rem); max-width: 1440px; height: 100%; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .logo { display: inline-flex; align-items: center; }
+  .desktop-nav { font-family: var(--font-serif); display: flex; align-items: center; gap: 1.25rem; font-size: .9375rem; font-weight: 400; text-transform: uppercase; letter-spacing: .1em; }
+  .desktop-nav a { min-height: 44px; display: inline-flex; align-items: center; gap: .5rem; }
+  .desktop-nav a[aria-current="location"] { color: var(--color-primary); }
+  .contact-link { color: var(--color-primary); }
+  .cv-link { padding-left: 1.2rem; border-left: 1px solid var(--color-border); }
+  .reading-progress { position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px; background: var(--color-primary); transform: scaleX(var(--reading-progress,0)); transform-origin: left; }
+  .mobile-menu-btn { display: none; width: 44px; height: 44px; padding: 0; place-items: center; background: none; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-text); cursor: pointer; }
+  dialog { inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 1.25rem 1.5rem 2rem; background: var(--color-bg); color: var(--color-text); overflow-y: auto; overscroll-behavior: contain; }
+  dialog[open] { display: flex; flex-direction: column; animation: menu-in .25s ease-out; }
+  dialog::backdrop { background: rgb(41 41 35 / 30%); }
+  .menu-top { display: flex; align-items: center; justify-content: space-between; font-size: .8rem; text-transform: uppercase; letter-spacing: .2em; }
+  dialog nav { margin: auto 0; padding: 2.5rem 0; }
+  dialog nav a { display: grid; grid-template-columns: 1.5rem minmax(0,1fr) 24px; align-items: center; gap: .75rem; padding: 1.1rem 0; border-bottom: 1px solid var(--color-border); font-family: var(--font-serif); font-size: 2rem; line-height: 1.3; }
+  .menu-number { font-family: var(--font-mono); font-size: .75rem; color: var(--color-primary); }
+  .menu-bottom { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; font-size: .8rem; }
+  .menu-bottom p { font-family: var(--font-mono); color: var(--color-text-muted); margin: 0; }
+  .menu-bottom a { font-family: var(--font-serif); display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; }
+  @keyframes menu-in { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 1099px) { .header-container { width: calc(100% - 5rem); gap: 1rem; } .desktop-nav { font-family: var(--font-serif); display: none; } .mobile-menu-btn { display: grid; flex-shrink: 0; } }
+  @media (max-width: 767px) { .header-container { width: calc(100% - 2.5rem); } }
+</style>

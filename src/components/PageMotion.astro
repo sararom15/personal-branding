@@ -1,0 +1,89 @@
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const desktop = window.matchMedia('(min-width: 768px)');
+  const dataLandscape = document.querySelector<SVGElement>('.data-landscape');
+  const traceObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        (entry.target as SVGElement).dataset.trace = 'visible';
+        traceObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .2 });
+  if (dataLandscape && !reduced.matches) {
+    dataLandscape.dataset.trace = 'ready';
+    traceObserver.observe(dataLandscape);
+  }
+  const revealTargets = document.querySelectorAll<HTMLElement>('.section-header, .service-card, .method-step, .journey-intro, .chapter, .bio p');
+  const reveal = new IntersectionObserver(entries => {
+    let order = 0;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target as HTMLElement;
+        target.style.setProperty('--reveal-delay', `${Math.min(order++, 3) * 80}ms`);
+        target.dataset.reveal = 'visible';
+        reveal.unobserve(target);
+      }
+    });
+  }, { threshold: .08 });
+  if (!reduced.matches) revealTargets.forEach(target => {
+    if (target.getBoundingClientRect().top > window.innerHeight) {
+      target.dataset.reveal = 'waiting';
+      reveal.observe(target);
+    }
+  });
+  // Anchors and keyboard navigation must never land on invisible content.
+  document.addEventListener('focusin', event => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>('[data-reveal="waiting"]');
+    if (target) {
+      target.style.setProperty('--reveal-delay', '0ms');
+      target.dataset.reveal = 'visible';
+      reveal.unobserve(target);
+    }
+  });
+
+  const navigation = document.querySelectorAll<HTMLAnchorElement>('.desktop-nav a[href^="#"]');
+  const sections = document.querySelectorAll<HTMLElement>('main > section[id]');
+  const activeSection = new IntersectionObserver(entries => {
+    const entry = entries.find(item => item.isIntersecting);
+    if (!entry) return;
+    navigation.forEach(link => {
+      if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    });
+  }, { rootMargin: '-15% 0px -65% 0px' });
+  sections.forEach(section => activeSection.observe(section));
+
+  const header = document.querySelector<HTMLElement>('.header');
+  const hero = document.querySelector<HTMLElement>('.hero-stage');
+  let heroHeight = hero?.offsetHeight || 0;
+  let progressFrame = 0;
+  const syncProgress = () => {
+    progressFrame = 0;
+    const scroll = window.scrollY;
+    const range = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    document.documentElement.style.setProperty('--reading-progress', Math.min(1, Math.max(0, scroll / range)).toString());
+    header?.classList.toggle('is-scrolled', scroll > 32);
+    const drift = !reduced.matches && desktop.matches ? Math.min(heroHeight, Math.max(0, scroll)) : 0;
+    hero?.style.setProperty('--hero-drift', `${Math.min(56, drift * .12)}px`);
+    hero?.style.setProperty('--data-drift', `${-Math.min(32, drift * .08)}px`);
+  };
+  const scheduleProgress = () => { if (!progressFrame) progressFrame = requestAnimationFrame(syncProgress); };
+  window.addEventListener('scroll', scheduleProgress, { passive: true });
+  window.addEventListener('resize', scheduleProgress, { passive: true });
+  new ResizeObserver(() => {
+    heroHeight = hero?.offsetHeight || 0;
+    scheduleProgress();
+  }).observe(document.body);
+  reduced.addEventListener('change', () => {
+    if (reduced.matches) {
+      reveal.disconnect();
+      traceObserver.disconnect();
+      if (dataLandscape) dataLandscape.dataset.trace = 'visible';
+      revealTargets.forEach(target => target.dataset.reveal = 'visible');
+    }
+    scheduleProgress();
+  });
+  desktop.addEventListener('change', scheduleProgress);
+  syncProgress();
+</script>

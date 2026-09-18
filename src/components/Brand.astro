@@ -1,0 +1,20 @@
+---
+interface Props { compact?: boolean; monogramOnly?: boolean; }
+const { compact = false, monogramOnly = false } = Astro.props;
+---
+<span class:list={['brand', { compact }]} aria-hidden="true">
+  <span class="monogram"><span>S</span><span>R</span></span>
+  {!monogramOnly && <span class="wordmark">Sara Romano<span>Data · AI · Strategy</span></span>}
+</span>
+<style>
+  .brand { display: inline-flex; align-items: center; gap: 1.25rem; color: var(--color-text); }
+  .monogram { display: block; position: relative; width: 62px; height: 70px; flex-shrink: 0; color: var(--color-primary); font-family: var(--font-logo); font-weight: 400; line-height: 1; }
+  .monogram > span:first-child { position: absolute; left: 0; top: -2px; font-size: 62px; }
+  .monogram > span:last-child { position: absolute; left: 22px; top: 20px; font-size: 58px; }
+  .wordmark { font-size: .875rem; text-transform: uppercase; letter-spacing: .32em; white-space: nowrap; line-height: 1.8; }
+  .wordmark > span { font-family: var(--font-mono); display: block; font-size: .625rem; letter-spacing: .08em; margin-top: .2rem; }
+  .compact .monogram { width: 47px; height: 56px; }
+  .compact .monogram > span:first-child { font-size: 49px; }
+  .compact .monogram > span:last-child { left: 17px; top: 16px; font-size: 46px; }
+  @media (max-width: 767px) { .brand { gap: .8rem; } .monogram { width: 46px; height: 56px; } .monogram > span:first-child { font-size: 48px; } .monogram > span:last-child { left: 17px; top: 16px; font-size: 45px; } .wordmark { font-size: .75rem; letter-spacing: .2em; } .wordmark > span { font-size: .6rem; letter-spacing: .05em; } }
+</style>

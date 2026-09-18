@@ -1,174 +1,37 @@
 ---
+import { ArrowDownRight } from '@lucide/astro';
 import InteractiveBackground from './InteractiveBackground.astro';
 ---
-<section id="chi-sono" class="section-alt">
+<section id="chi-sono" aria-labelledby="about-title">
   <InteractiveBackground />
-  <div class="container content-container">
-
-    <div class="section-header">
-      <h2 class="section-title">Chi Sono</h2>
-      <p class="section-subtitle">L'UMANITÀ DIETRO LA TECNOLOGIA</p>
-    </div>
-    <div class="about-text">
-        <div class="bio">
-          <p>
-            Sono cresciuta nel <strong class="highlight">Sud Italia</strong>, tra ulivi, vento e silenzi lunghi.<br>
-            Un luogo dove tutto sembra immobile, ma sotto la superficie c’è resistenza, adattamento, ingegno.
-          </p>
-          <p>
-            Forse è lì che ho imparato la cosa più importante:<br>
-            <strong>l’innovazione non è rumore. È trasformazione lenta, concreta, radicata.</strong>
-          </p>
-          <p>
-            Sono partita dall’<strong class="highlight">ingegneria robotica</strong>. Algoritmi. Sistemi complessi. Controllo. Ottimizzazione.
-          </p>
-          <p>
-            Mi affascinava l’idea di costruire macchine capaci di orientarsi nel caos, di prendere decisioni in ambienti imprevedibili.
-          </p>
-          <p>
-            Poi ho iniziato a lavorare con le aziende.<br>
-            E ho capito qualcosa di ancora più complesso dei robot:
-          </p>
-          <p>
-            Le organizzazioni non hanno bisogno solo di sistemi che funzionano.<br>
-            Hanno bisogno di <strong>sistemi che comprendono</strong>.
-          </p>
-          <p>
-            Così ho ampliato il mio percorso nella <strong class="highlight">comunicazione digitale</strong> e nell’<strong class="highlight">innovazione nel marketing</strong>.<br>
-            Non per cambiare identità.<br>
-            Ma per renderla completa.
-          </p>
-          <p>
-            Oggi progetto soluzioni di AI e automazione con una doppia lente:<br>
-            <strong class="highlight">rigore ingegneristico</strong> e <strong class="highlight">visione strategica</strong>.
-          </p>
-          <p>
-            Resto profondamente legata al mio territorio.<br>
-            Non come nostalgia, ma come responsabilità.<br>
-            Credo che l’innovazione debba generare valore anche nei luoghi che spesso restano ai margini delle grandi narrazioni tecnologiche.
-          </p>
-          <p>
-            <strong class="highlight">La tecnica è il mio linguaggio, l'impatto è la mia direzione.</strong>
-          </p>
-        </div>
+  <div class="container">
+    <div class="about-top"><span class="eyebrow">01 / Chi sono</span><span class="about-location">Radici in Puglia. Sguardo sul futuro.</span></div>
+    <div class="about-grid">
+      <div class="about-heading section-header">
+        <h2 id="about-title">La tecnica è<br />il mio linguaggio.<br /><em>L’impatto, la mia<br />direzione.</em></h2>
+      </div>
+      <div class="bio">
+        <p class="bio-lead">Sono Sara Romano. Unisco <strong>rigore ingegneristico e visione strategica</strong> per dare una direzione umana all’innovazione.</p>
+        <p>Sono cresciuta nel Sud Italia, tra ulivi, vento e silenzi lunghi. È lì che ho imparato che l’innovazione è una trasformazione lenta, concreta, radicata.</p>
+        <p>Sono partita dall’ingegneria robotica: algoritmi, sistemi complessi, macchine capaci di orientarsi nel caos. Lavorando con le aziende ho scoperto una complessità ancora più interessante: le persone.</p>
+        <p>Così ho ampliato il mio percorso nella comunicazione digitale e nell’innovazione nel marketing. Oggi progetto soluzioni di AI e automazione con questa doppia lente: capire come funzionano i sistemi e come possono aiutare chi li usa.</p>
+        <p>Resto legata al mio territorio, con la convinzione che l’innovazione debba generare valore anche nei luoghi che spesso restano ai margini delle grandi narrazioni tecnologiche.</p>
+        <a href="#cosa-faccio" class="text-link">Come posso aiutare la tua impresa <ArrowDownRight size={19} stroke-width={1.2}/></a>
+      </div>
     </div>
   </div>
 </section>
-
 <style>
-  .section-alt {
-    background-color: var(--color-surface);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .content-container {
-    position: relative;
-    z-index: 2;
-  }
-
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    margin-top: 3rem;
-  }
-
-  .about-text {
-    text-align: left;
-  }
-
-  .highlight {
-    color: var(--color-primary);
-    font-weight: 600;
-  }
-  
-
-
-
-
-  .bio p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    color: #cccccc;
-    line-height: 1.7;
-  }
-
-  /* PHOTO STACK STYLES */
-  .visual-col {
-    position: relative;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .photo-stack {
-    position: relative;
-    width: 300px;
-    height: 400px;
-  }
-
-  .photo-wrapper {
-    position: absolute;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-    transition: transform 0.4s ease, z-index 0.4s;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .photo-wrapper img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Photo 1: Bottom Layer, darker, tilted left */
-  .p1 {
-    width: 260px;
-    height: 340px;
-    top: 20px;
-    left: 0;
-    transform: rotate(-6deg) scale(0.9);
-    z-index: 1;
-    filter: brightness(0.7) grayscale(0.3);
-  }
-
-  /* Photo 2: Top Layer, bright, tilted right */
-  .p2 {
-    width: 280px;
-    height: 360px;
-    top: 0;
-    right: 0;
-    transform: rotate(4deg);
-    z-index: 2;
-  }
-
-  .photo-stack:hover .p1 {
-    transform: rotate(-10deg) translateX(-20px) scale(0.95);
-    filter: brightness(1) grayscale(0);
-    z-index: 3;
-  }
-
-  .photo-stack:hover .p2 {
-    transform: rotate(8deg) translateX(20px);
-  }
-
-  @media (max-width: 900px) {
-    .content-grid {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-
-    .visual-col {
-      order: -1;
-      height: 350px;
-    }
-    
-    .about-text {
-      text-align: center;
-    }
-  }</style>
+  #chi-sono { position: relative; isolation: isolate; }
+  #chi-sono > .container { z-index: 1; }
+  .about-top { display: flex; justify-content: space-between; gap: 2rem; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 1.3rem; margin-bottom: 3.5rem; }
+  .about-location { font-family: var(--font-mono); color: var(--color-text-muted); font-size: .75rem; letter-spacing: .04em; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; }
+  .about-heading { margin: 0; }
+  .about-heading h2 { font-size: clamp(3rem,4.4vw,4.4rem); line-height: 1.06; }
+  .bio p { color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.85; }
+  .bio .bio-lead { font-size: 1.2rem; color: var(--color-text); line-height: 1.6; margin-bottom: 1.75rem; }
+  .bio-lead strong { color: var(--color-primary); }
+  .bio .text-link { border-bottom: 1px solid var(--color-primary); padding-bottom: .3rem; margin-top: .5rem; }
+  @media (max-width: 767px) { .about-top { margin-bottom: 2.5rem; } .about-location { max-width: 150px; text-align: right; font-size: .75rem; } .about-grid { grid-template-columns: 1fr; gap: 2rem; } .about-heading h2 { font-size: 3.15rem; } .bio .bio-lead { font-size: 1.1rem; } }
+</style>

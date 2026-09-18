@@ -1,258 +1,104 @@
 ---
+import { Cpu, MessageCircle, Compass, GraduationCap } from '@lucide/astro';
+
 const services = [
   {
-    title: "Automation & AI",
-    description: "Progetto agenti intelligenti e sistemi automatizzati integrati nei processi aziendali.<br/><br/>L’obiettivo è ridurre dispersioni operative e migliorare la coerenza decisionale.",
-    icon: "cpu"
+    title: "Innovazione e soluzioni AI su misura",
+    description: "Analizzo come lavora la tua azienda e trovo dove si perdono tempo ed energie. Poi costruisco la soluzione: automazioni tra gli strumenti che già usi, assistenti AI che conoscono i tuoi documenti, piattaforme su misura. Non mi fermo al consiglio: se serve, la soluzione la sviluppo io.",
+    Icon: Cpu
   },
   {
-    title: "Data Analysis & Dashboarding",
-    description: "Costruisco ambienti di analisi che trasformano dati eterogenei in indicatori comprensibili.<br/><br/>Dalla raccolta alla visualizzazione, ogni passaggio è pensato per supportare scelte concrete.",
-    icon: "bar-chart"
+    title: "Comunicazione digitale e marketing",
+    description: "Strategia, contenuti e presenza online, con l'intelligenza artificiale come alleata per lavorare meglio e con meno fatica. E i dati giusti per capire cosa funziona davvero, prima di investire di nuovo.",
+    Icon: MessageCircle
   },
   {
-    title: "Software & Web Development",
-    description: "Sviluppo piattaforme e applicazioni su misura, progettate per dialogare con infrastrutture esistenti e crescere nel tempo.",
-    icon: "code"
+    title: "Innovation management",
+    description: "Un punto di riferimento esterno per l'innovazione della tua impresa: una roadmap chiara, la scelta imparziale di strumenti e fornitori, le opportunità di finanziamento da cogliere. Così innovare diventa un percorso, non una somma di tentativi.",
+    Icon: Compass
   },
   {
-    title: "Digital Innovation & Communication",
-    description: "Integro strumenti digitali e modelli di AI in strategie di marketing e comunicazione.<br/><br/>Perché l’adozione tecnologica è anche un processo culturale.",
-    icon: "message-circle" 
+    title: "Formazione e AI in azienda",
+    description: "Workshop pratici per titolari e team: cosa può fare l'intelligenza artificiale per voi, come usarla bene, quali regole rispettare. Costruiti sui vostri strumenti e sui vostri casi reali, perché l'obiettivo è uno solo: rendervi autonomi.",
+    Icon: GraduationCap
   }
 ];
 ---
-
-<section id="cosa-faccio" class="section-alt">
+<section id="cosa-faccio" aria-labelledby="services-title">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Cosa Faccio</h2>
-      <p class="section-subtitle">DOVE I DATI INCONTRANO LE PERSONE</p>
+    <div class="services-heading section-header">
+      <div><span class="eyebrow">02 / Cosa faccio</span><h2 id="services-title">Dalla complessità<br /><em>alle possibilità.</em></h2></div>
+      <p>Lavoro con imprese che vogliono innovare senza perdersi tra mode e tecnologie. Quattro ambiti, un unico obiettivo: generare valore concreto.</p>
     </div>
-    
-    <div class="intro-content">
-      <div class="intro-text">
-        <p>
-          Quando entro in un progetto, il mio primo compito non è sviluppare.<br/>
-          <strong>È comprendere.</strong>
-        </p>
-        <p>
-          Analizzo flussi operativi.<br/>
-          Osservo come circolano le informazioni.<br/>
-          Individuo dove si genera attrito.
-        </p>
-        <p>
-          Poi progetto soluzioni che rendano il sistema <strong>più leggibile, più stabile, più efficace.</strong>
-        </p>
-        <p>
-          Lavoro su intelligenza artificiale, automazione, dati e piattaforme digitali.<br/>
-          Ma il risultato finale non è una tecnologia in più.
-        </p>
-        <p>
-          <strong class="highlight">È una struttura più chiara.</strong>
-        </p>
-      </div>
-
-      <div class="intro-visual">
-         <div class="image-wrapper img-1">
-           <img src="/SaraAIFestival.JPG" alt="Sara a AI Festival" />
-         </div>
-         <div class="image-wrapper img-2">
-           <img src="/SaraAIFestival2.JPG" alt="Sara Speaker" />
-         </div>
-      </div>
-    </div>
-
     <div class="services-grid">
-      {services.map(service => (
-        <div class="service-card">
-          <div class="icon-box">
-             <!-- Placeholder icon logic -->
-             <div class="icon-circle"></div>
-          </div>
+      {services.map((service,index) => (
+        <article class="service-card" style={`--service-index: ${index}`} id={['ai','communication','innovation','formazione'][index]}>
+          <div class="service-top"><span class="service-number">0{index+1}</span><service.Icon size={32} stroke-width={1}/></div>
+          <span class="service-label">{['Data & AI','Communication','Innovation','People & learning'][index]}</span>
           <h3>{service.title}</h3>
-          <p set:html={service.description}></p>
-        </div>
+          <p>{service.description}</p>
+          <a href="#contatti" class="text-link">Parliamone <span aria-hidden="true">↗</span></a>
+        </article>
       ))}
     </div>
-
-
   </div>
 </section>
-
+<script>
+  const stack = document.querySelector<HTMLElement>('.services-grid');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.service-card'));
+  const stackViewport = window.matchMedia('(min-width: 1100px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)');
+  if (stack) {
+    // Keep every card readable when the viewport or text size changes.
+    const measureStack = () => {
+      const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height'));
+      const available = window.innerHeight - header - 24 - (cards.length - 1) * 52 - 24;
+      stack.dataset.stack = String(stackViewport.matches && cards.every(card => card.offsetHeight <= available));
+    };
+    const resize = new ResizeObserver(measureStack);
+    cards.forEach(card => resize.observe(card));
+    window.addEventListener('resize', measureStack, { passive: true });
+    stackViewport.addEventListener('change', measureStack);
+    stack.addEventListener('focusin', event => {
+      if (stack.dataset.stack !== 'true') return;
+      const card = (event.target as HTMLElement).closest<HTMLElement>('.service-card');
+      if (card) {
+        // A covered card must come back into view when reached by keyboard.
+        const previous = card.style.position;
+        card.style.position = 'static';
+        const origin = card.getBoundingClientRect().top + window.scrollY;
+        card.style.position = previous;
+        const top = parseFloat(getComputedStyle(card).top) || 0;
+        window.scrollTo({ top: origin - top, behavior: 'instant' });
+      }
+    });
+    measureStack();
+  }
+</script>
 <style>
-  .section-alt {
-    background-color: var(--color-surface);
-  }
-
-  /* Split Layout */
-  .intro-content {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
-    align-items: center;
-    margin-bottom: 5rem;
-  }
-
-  .intro-text {
-    text-align: left;
-    max-width: none; /* Reset max-width constraint */
-    margin: 0;
-  }
-
-  .intro-text p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: #cccccc;
-    margin-bottom: 1.5rem;
-  }
-
-  .highlight {
-    color: var(--color-primary);
-    font-weight: 600;
-  }
-
-  /* Visual Grid on Right */
-  .intro-visual {
-    position: relative;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .image-wrapper {
-    position: absolute;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .image-wrapper img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* First Image: Back, larger, tilted left */
-  .img-1 {
-    width: 280px;
-    height: 380px;
-    top: 10px;
-    left: 20px;
-    z-index: 1;
-    transform: rotate(-3deg);
-    filter: brightness(0.7);
-  }
-
-  /* Second Image: Front, slightly smaller but focal, tilted right */
-  .img-2 {
-    width: 260px;
-    height: 340px;
-    bottom: 0;
-    right: 20px;
-    z-index: 2;
-    transform: rotate(3deg) translateY(20px);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-  }
-
-  /* Interactive Hover */
-  .intro-visual:hover .img-1 {
-    transform: rotate(-5deg) translateX(-15px) scale(0.95);
-    filter: brightness(1);
-    z-index: 2;
-  }
-
-  .intro-visual:hover .img-2 {
-    transform: rotate(5deg) translateX(15px) scale(0.95);
-    z-index: 1; /* Swap depth on hover */
-    filter: brightness(0.5);
-  }
-
-  .intro-visual:hover .img-2:hover {
-    filter: brightness(1);
-    z-index: 3;
-    transform: scale(1.05);
-  }
-
-  /* Services Grid */
-  .services-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-bottom: 4rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .service-card {
-    background-color: var(--color-bg);
-    padding: 3rem;
-    border-radius: 20px;
-    border: 1px solid var(--color-border);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    position: sticky;
-    top: calc(var(--header-height) + 2rem);
-    box-shadow: 0 -10px 20px rgba(0,0,0,0.1); 
-  }
-
-  /* Stacking offsets */
-  .service-card:nth-child(1) { top: calc(var(--header-height) + 2rem); }
-  .service-card:nth-child(2) { top: calc(var(--header-height) + 4rem); }
-  .service-card:nth-child(3) { top: calc(var(--header-height) + 6rem); }
-  .service-card:nth-child(4) { top: calc(var(--header-height) + 8rem); }
-
-  .service-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-primary);
-    box-shadow: 0 -10px 30px rgba(255, 92, 0, 0.1);
-  }
-
-  .icon-box {
-    margin-bottom: 1.5rem;
-  }
-
-  .icon-circle {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 92, 0, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .service-card h3 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-  }
-
-  .service-card p {
-    color: var(--color-text-muted);
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-
-
-
-  @media (max-width: 1024px) {
-    .intro-content {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      text-align: center;
-    }
-    
-    .intro-text {
-      text-align: center;
-    }
-
-    .intro-visual {
-      order: -1; /* Pictures first on mobile/tablet */
-      margin-bottom: 2rem;
-    }
+  #cosa-faccio { background: var(--color-surface); }
+  .services-heading { display: flex; align-items: end; justify-content: space-between; gap: 4rem; }
+  .services-heading > p { font-family: var(--font-mono); max-width: 365px; color: var(--color-text-muted); font-size: .9375rem; line-height: 1.8; margin-bottom: .25rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--color-border); }
+  .service-card { padding: 2.5rem 3rem 2.5rem 0; border-bottom: 1px solid var(--color-border); scroll-margin-top: calc(var(--header-height) + 24px); display: flex; flex-direction: column; }
+  .service-card:nth-child(even) { border-left: 1px solid var(--color-border); padding-left: 3rem; padding-right: 0; }
+  .service-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.8rem; }
+  .service-number { color: var(--color-text-muted); font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; }
+  .service-top :global(svg) { color: var(--color-primary); }
+  .service-label { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--color-primary); margin-bottom: .9rem; }
+  .service-card h3 { max-width: 390px; font-size: clamp(2rem,2.8vw,2.7rem); letter-spacing: -.025em; margin-bottom: 1.2rem; }
+  .service-card p { color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.85; max-width: 490px; margin-bottom: 1.25rem; }
+  .service-card .text-link { align-self: start; margin-top: auto; font-size: 1rem; }
+  .text-link > span { color: var(--color-primary); font-size: 1.35rem; }
+  @media (max-width: 767px) { .services-heading { display: block; } .services-heading > p { margin-top: 1.5rem; } .services-grid { grid-template-columns: 1fr; } .service-card, .service-card:nth-child(even) { padding: 2rem 0; border-left: 0; } .service-top { margin-bottom: 1.5rem; } .service-card h3 { font-size: 2.2rem; max-width: 320px; } }
+  @media (min-width: 1100px) and (min-height: 760px) and (prefers-reduced-motion: no-preference) {
+    .services-grid { grid-template-columns: 1fr; gap: 1.75rem; border-top: 0; padding-bottom: 5rem; }
+    .service-card, .service-card:nth-child(even) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; column-gap: 8%; row-gap: 1rem; padding: 1.1rem 2.5rem 2rem; border: 1px solid var(--color-border); background: var(--color-bg); box-shadow: 0 -4px 20px rgb(64 43 24 / 4%); min-height: 345px; scroll-margin-top: calc(var(--header-height) + 24px + var(--service-index) * 52px); }
+    .services-grid[data-stack="true"] .service-card { position: sticky; top: calc(var(--header-height) + 24px + var(--service-index) * 52px); }
+    .service-top { grid-column: 1 / -1; grid-row: 1; padding-bottom: .75rem; border-bottom: 1px solid var(--color-border); margin-bottom: .35rem; }
+    .service-top :global(svg) { width: 25px; height: 25px; }
+    .service-label { grid-column: 1; grid-row: 2; margin: 0; }
+    .service-card h3 { grid-column: 1; grid-row: 3 / 5; max-width: 430px; font-size: clamp(2.5rem, 3.4vw, 3.3rem); margin: 0; }
+    .service-card p { grid-column: 2; grid-row: 2 / 4; margin: 0; max-width: none; }
+    .service-card .text-link { grid-column: 2; grid-row: 4; justify-self: start; margin: 0; }
   }
 </style>
