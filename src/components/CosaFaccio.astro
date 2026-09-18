@@ -1,5 +1,5 @@
 ---
-import { Cpu, MessageCircle, Compass, GraduationCap } from '@lucide/astro';
+import { ArrowDownRight, Cpu, MessageCircle, Compass, GraduationCap } from '@lucide/astro';
 
 const services = [
   {
@@ -37,7 +37,7 @@ const services = [
           <span class="service-label">{['Data & AI','Communication','Innovation','People & learning'][index]}</span>
           <h3>{service.title}</h3>
           <p>{service.description}</p>
-          <a href="#contatti" class="text-link">Parliamone <span aria-hidden="true">↗</span></a>
+          <a href="#contatti" class="text-link text-link-underlined">Parliamone <ArrowDownRight size={19} stroke-width={1.2}/></a>
         </article>
       ))}
     </div>
@@ -87,8 +87,7 @@ const services = [
   .service-label { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--color-primary); margin-bottom: .9rem; }
   .service-card h3 { max-width: 390px; font-size: clamp(2rem,2.8vw,2.7rem); letter-spacing: -.025em; margin-bottom: 1.2rem; }
   .service-card p { color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.85; max-width: 490px; margin-bottom: 1.25rem; }
-  .service-card .text-link { align-self: start; margin-top: auto; font-size: 1rem; }
-  .text-link > span { color: var(--color-primary); font-size: 1.35rem; }
+  .service-card .text-link { align-self: start; margin-top: auto; }
   @media (max-width: 767px) { .services-heading { display: block; } .services-heading > p { margin-top: 1.5rem; } .services-grid { grid-template-columns: 1fr; } .service-card, .service-card:nth-child(even) { padding: 2rem 0; border-left: 0; } .service-top { margin-bottom: 1.5rem; } .service-card h3 { font-size: 2.2rem; max-width: 320px; } }
   @media (min-width: 1100px) and (min-height: 760px) and (prefers-reduced-motion: no-preference) {
     .services-grid { grid-template-columns: 1fr; gap: 1.75rem; border-top: 0; padding-bottom: 5rem; }
